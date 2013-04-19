@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C3006" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Employee" representedClassName="Employee" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" minValueString="3" maxValueString="12" defaultValueString="Unkown Name" syncable="YES"/>
+        <attribute name="salary" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="manager" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Manager" inverseName="employees" inverseEntity="Manager" syncable="YES"/>
+    </entity>
+    <entity name="Manager" representedClassName="Manager" syncable="YES">
+        <attribute name="departmentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Employee" inverseName="manager" inverseEntity="Employee" syncable="YES"/>
+    </entity>
+    <fetchRequest name="allManagers" entity="Manager" predicateString="TRUEPREDICATE"/>
+    <elements>
+        <element name="Employee" positionX="-261" positionY="-135" width="128" height="90"/>
+        <element name="Manager" positionX="-450" positionY="-135" width="128" height="88"/>
+    </elements>
+</model>
