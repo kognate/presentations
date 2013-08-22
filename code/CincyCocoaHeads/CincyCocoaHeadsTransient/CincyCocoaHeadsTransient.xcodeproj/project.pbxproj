@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40A747CA17BF422D000F973C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747C917BF422D000F973C /* Foundation.framework */; };
+		40A747CC17BF422D000F973C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747CB17BF422D000F973C /* CoreGraphics.framework */; };
+		40A747CE17BF422D000F973C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747CD17BF422D000F973C /* UIKit.framework */; };
+		40A747D017BF422D000F973C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747CF17BF422D000F973C /* CoreData.framework */; };
+		40A747D617BF422D000F973C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40A747D417BF422D000F973C /* InfoPlist.strings */; };
+		40A747D817BF422D000F973C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747D717BF422D000F973C /* main.m */; };
+		40A747DC17BF422D000F973C /* RCWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747DB17BF422D000F973C /* RCWAppDelegate.m */; };
+		40A747DF17BF422D000F973C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A747DD17BF422D000F973C /* Main.storyboard */; };
+		40A747E217BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40A747E017BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld */; };
+		40A747E517BF422D000F973C /* RCWMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747E417BF422D000F973C /* RCWMainViewController.m */; };
+		40A747E817BF422D000F973C /* RCWFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747E717BF422D000F973C /* RCWFlipsideViewController.m */; };
+		40A747EA17BF422D000F973C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40A747E917BF422D000F973C /* Images.xcassets */; };
+		40A747F117BF422D000F973C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747F017BF422D000F973C /* XCTest.framework */; };
+		40A747F217BF422D000F973C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747C917BF422D000F973C /* Foundation.framework */; };
+		40A747F317BF422D000F973C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747CD17BF422D000F973C /* UIKit.framework */; };
+		40A747F417BF422D000F973C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A747CF17BF422D000F973C /* CoreData.framework */; };
+		40A747FC17BF422D000F973C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40A747FA17BF422D000F973C /* InfoPlist.strings */; };
+		40A747FE17BF422D000F973C /* CincyCocoaHeadsTransientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747FD17BF422D000F973C /* CincyCocoaHeadsTransientTests.m */; };
+		40A7480917BF4288000F973C /* SecretMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A7480817BF4288000F973C /* SecretMessage.m */; };
+		40A7480B17BF4390000F973C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A7480A17BF4390000F973C /* Security.framework */; };
+		40E7953117C487F8001BFBD7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40A747F517BF422D000F973C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40A747BE17BF422D000F973C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40A747C517BF422D000F973C;
+			remoteInfo = CincyCocoaHeadsTransient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		40A747C617BF422D000F973C /* CincyCocoaHeadsTransient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CincyCocoaHeadsTransient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40A747C917BF422D000F973C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		40A747CB17BF422D000F973C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		40A747CD17BF422D000F973C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		40A747CF17BF422D000F973C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		40A747D317BF422D000F973C /* CincyCocoaHeadsTransient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CincyCocoaHeadsTransient-Info.plist"; sourceTree = "<group>"; };
+		40A747D517BF422D000F973C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		40A747D717BF422D000F973C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		40A747D917BF422D000F973C /* CincyCocoaHeadsTransient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CincyCocoaHeadsTransient-Prefix.pch"; sourceTree = "<group>"; };
+		40A747DA17BF422D000F973C /* RCWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCWAppDelegate.h; sourceTree = "<group>"; };
+		40A747DB17BF422D000F973C /* RCWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCWAppDelegate.m; sourceTree = "<group>"; };
+		40A747DE17BF422D000F973C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		40A747E117BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CincyCocoaHeadsTransient.xcdatamodel; sourceTree = "<group>"; };
+		40A747E317BF422D000F973C /* RCWMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCWMainViewController.h; sourceTree = "<group>"; };
+		40A747E417BF422D000F973C /* RCWMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCWMainViewController.m; sourceTree = "<group>"; };
+		40A747E617BF422D000F973C /* RCWFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCWFlipsideViewController.h; sourceTree = "<group>"; };
+		40A747E717BF422D000F973C /* RCWFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCWFlipsideViewController.m; sourceTree = "<group>"; };
+		40A747E917BF422D000F973C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		40A747EF17BF422D000F973C /* CincyCocoaHeadsTransientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CincyCocoaHeadsTransientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40A747F017BF422D000F973C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		40A747F917BF422D000F973C /* CincyCocoaHeadsTransientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CincyCocoaHeadsTransientTests-Info.plist"; sourceTree = "<group>"; };
+		40A747FB17BF422D000F973C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		40A747FD17BF422D000F973C /* CincyCocoaHeadsTransientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CincyCocoaHeadsTransientTests.m; sourceTree = "<group>"; };
+		40A7480717BF4288000F973C /* SecretMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretMessage.h; sourceTree = "<group>"; };
+		40A7480817BF4288000F973C /* SecretMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretMessage.m; sourceTree = "<group>"; };
+		40A7480A17BF4390000F973C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		40E7953017C487F8001BFBD7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		40A747C317BF422D000F973C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A7480B17BF4390000F973C /* Security.framework in Frameworks */,
+				40A747CC17BF422D000F973C /* CoreGraphics.framework in Frameworks */,
+				40A747D017BF422D000F973C /* CoreData.framework in Frameworks */,
+				40A747CE17BF422D000F973C /* UIKit.framework in Frameworks */,
+				40A747CA17BF422D000F973C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40A747EC17BF422D000F973C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A747F117BF422D000F973C /* XCTest.framework in Frameworks */,
+				40A747F417BF422D000F973C /* CoreData.framework in Frameworks */,
+				40A747F317BF422D000F973C /* UIKit.framework in Frameworks */,
+				40A747F217BF422D000F973C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40A747BD17BF422D000F973C = {
+			isa = PBXGroup;
+			children = (
+				40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */,
+				40E7953017C487F8001BFBD7 /* KeychainItemWrapper.h */,
+				40A747D117BF422D000F973C /* CincyCocoaHeadsTransient */,
+				40A747F717BF422D000F973C /* CincyCocoaHeadsTransientTests */,
+				40A747C817BF422D000F973C /* Frameworks */,
+				40A747C717BF422D000F973C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		40A747C717BF422D000F973C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40A747C617BF422D000F973C /* CincyCocoaHeadsTransient.app */,
+				40A747EF17BF422D000F973C /* CincyCocoaHeadsTransientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40A747C817BF422D000F973C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40A7480A17BF4390000F973C /* Security.framework */,
+				40A747C917BF422D000F973C /* Foundation.framework */,
+				40A747CB17BF422D000F973C /* CoreGraphics.framework */,
+				40A747CD17BF422D000F973C /* UIKit.framework */,
+				40A747CF17BF422D000F973C /* CoreData.framework */,
+				40A747F017BF422D000F973C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		40A747D117BF422D000F973C /* CincyCocoaHeadsTransient */ = {
+			isa = PBXGroup;
+			children = (
+				40A747DA17BF422D000F973C /* RCWAppDelegate.h */,
+				40A747DB17BF422D000F973C /* RCWAppDelegate.m */,
+				40A747DD17BF422D000F973C /* Main.storyboard */,
+				40A747E317BF422D000F973C /* RCWMainViewController.h */,
+				40A747E417BF422D000F973C /* RCWMainViewController.m */,
+				40A747E617BF422D000F973C /* RCWFlipsideViewController.h */,
+				40A747E717BF422D000F973C /* RCWFlipsideViewController.m */,
+				40A747E917BF422D000F973C /* Images.xcassets */,
+				40A747E017BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld */,
+				40A7480717BF4288000F973C /* SecretMessage.h */,
+				40A7480817BF4288000F973C /* SecretMessage.m */,
+				40A747D217BF422D000F973C /* Supporting Files */,
+			);
+			path = CincyCocoaHeadsTransient;
+			sourceTree = "<group>";
+		};
+		40A747D217BF422D000F973C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40A747D317BF422D000F973C /* CincyCocoaHeadsTransient-Info.plist */,
+				40A747D417BF422D000F973C /* InfoPlist.strings */,
+				40A747D717BF422D000F973C /* main.m */,
+				40A747D917BF422D000F973C /* CincyCocoaHeadsTransient-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40A747F717BF422D000F973C /* CincyCocoaHeadsTransientTests */ = {
+			isa = PBXGroup;
+			children = (
+				40A747FD17BF422D000F973C /* CincyCocoaHeadsTransientTests.m */,
+				40A747F817BF422D000F973C /* Supporting Files */,
+			);
+			path = CincyCocoaHeadsTransientTests;
+			sourceTree = "<group>";
+		};
+		40A747F817BF422D000F973C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40A747F917BF422D000F973C /* CincyCocoaHeadsTransientTests-Info.plist */,
+				40A747FA17BF422D000F973C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		40A747C517BF422D000F973C /* CincyCocoaHeadsTransient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40A7480117BF422D000F973C /* Build configuration list for PBXNativeTarget "CincyCocoaHeadsTransient" */;
+			buildPhases = (
+				40A747C217BF422D000F973C /* Sources */,
+				40A747C317BF422D000F973C /* Frameworks */,
+				40A747C417BF422D000F973C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CincyCocoaHeadsTransient;
+			productName = CincyCocoaHeadsTransient;
+			productReference = 40A747C617BF422D000F973C /* CincyCocoaHeadsTransient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		40A747EE17BF422D000F973C /* CincyCocoaHeadsTransientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40A7480417BF422D000F973C /* Build configuration list for PBXNativeTarget "CincyCocoaHeadsTransientTests" */;
+			buildPhases = (
+				40A747EB17BF422D000F973C /* Sources */,
+				40A747EC17BF422D000F973C /* Frameworks */,
+				40A747ED17BF422D000F973C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40A747F617BF422D000F973C /* PBXTargetDependency */,
+			);
+			name = CincyCocoaHeadsTransientTests;
+			productName = CincyCocoaHeadsTransientTests;
+			productReference = 40A747EF17BF422D000F973C /* CincyCocoaHeadsTransientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		40A747BE17BF422D000F973C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RCW;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Josh Smith";
+				TargetAttributes = {
+					40A747EE17BF422D000F973C = {
+						TestTargetID = 40A747C517BF422D000F973C;
+					};
+				};
+			};
+			buildConfigurationList = 40A747C117BF422D000F973C /* Build configuration list for PBXProject "CincyCocoaHeadsTransient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 40A747BD17BF422D000F973C;
+			productRefGroup = 40A747C717BF422D000F973C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				40A747C517BF422D000F973C /* CincyCocoaHeadsTransient */,
+				40A747EE17BF422D000F973C /* CincyCocoaHeadsTransientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		40A747C417BF422D000F973C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A747EA17BF422D000F973C /* Images.xcassets in Resources */,
+				40A747D617BF422D000F973C /* InfoPlist.strings in Resources */,
+				40A747DF17BF422D000F973C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40A747ED17BF422D000F973C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A747FC17BF422D000F973C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40A747C217BF422D000F973C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A747D817BF422D000F973C /* main.m in Sources */,
+				40A747DC17BF422D000F973C /* RCWAppDelegate.m in Sources */,
+				40A747E817BF422D000F973C /* RCWFlipsideViewController.m in Sources */,
+				40A747E517BF422D000F973C /* RCWMainViewController.m in Sources */,
+				40A747E217BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld in Sources */,
+				40A7480917BF4288000F973C /* SecretMessage.m in Sources */,
+				40E7953117C487F8001BFBD7 /* KeychainItemWrapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40A747EB17BF422D000F973C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A747FE17BF422D000F973C /* CincyCocoaHeadsTransientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		40A747F617BF422D000F973C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40A747C517BF422D000F973C /* CincyCocoaHeadsTransient */;
+			targetProxy = 40A747F517BF422D000F973C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		40A747D417BF422D000F973C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40A747D517BF422D000F973C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		40A747DD17BF422D000F973C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40A747DE17BF422D000F973C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		40A747FA17BF422D000F973C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40A747FB17BF422D000F973C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		40A747FF17BF422D000F973C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		40A7480017BF422D000F973C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		40A7480217BF422D000F973C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Prefix.pch";
+				INFOPLIST_FILE = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		40A7480317BF422D000F973C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Prefix.pch";
+				INFOPLIST_FILE = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		40A7480517BF422D000F973C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CincyCocoaHeadsTransient.app/CincyCocoaHeadsTransient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CincyCocoaHeadsTransientTests/CincyCocoaHeadsTransientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		40A7480617BF422D000F973C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CincyCocoaHeadsTransient.app/CincyCocoaHeadsTransient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CincyCocoaHeadsTransient/CincyCocoaHeadsTransient-Prefix.pch";
+				INFOPLIST_FILE = "CincyCocoaHeadsTransientTests/CincyCocoaHeadsTransientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40A747C117BF422D000F973C /* Build configuration list for PBXProject "CincyCocoaHeadsTransient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40A747FF17BF422D000F973C /* Debug */,
+				40A7480017BF422D000F973C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40A7480117BF422D000F973C /* Build configuration list for PBXNativeTarget "CincyCocoaHeadsTransient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40A7480217BF422D000F973C /* Debug */,
+				40A7480317BF422D000F973C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40A7480417BF422D000F973C /* Build configuration list for PBXNativeTarget "CincyCocoaHeadsTransientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40A7480517BF422D000F973C /* Debug */,
+				40A7480617BF422D000F973C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40A747E017BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40A747E117BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodel */,
+			);
+			currentVersion = 40A747E117BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodel */;
+			path = CincyCocoaHeadsTransient.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 40A747BE17BF422D000F973C /* Project object */;
+}
