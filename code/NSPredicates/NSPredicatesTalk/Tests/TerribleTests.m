@@ -38,17 +38,17 @@
 {
     [self.truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
      {
-         STAssertTrue([self.terrible thisIsTerrible:obj], @"This should be true");
-         STAssertTrue([self.notterrible predicatesTIT:obj], @"This is better");
-         STAssertTrue([self.notterrible predicatesTITshort:obj], @"This is better");
+         XCTAssertTrue([self.terrible thisIsTerrible:obj], @"This should be true");
+         XCTAssertTrue([self.notterrible predicatesTIT:obj], @"This is better");
+         XCTAssertTrue([self.notterrible predicatesTITshort:obj], @"This is better");
      }
      ];
 
     [self.falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
      {
-         STAssertFalse([self.terrible thisIsTerrible:obj], @"This should be false");
-         STAssertFalse([self.notterrible predicatesTIT:obj], @"This should be false");
-         STAssertFalse([self.notterrible predicatesTITshort:obj], @"This should be false");
+         XCTAssertFalse([self.terrible thisIsTerrible:obj], @"This should be false");
+         XCTAssertFalse([self.notterrible predicatesTIT:obj], @"This should be false");
+         XCTAssertFalse([self.notterrible predicatesTITshort:obj], @"This should be false");
      }
      ];
 }
@@ -56,21 +56,21 @@
 - (void) testIsThisReallyTerrible {
     [self.truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
      {
-         STAssertTrue([self.terrible thisIsReallyTerrible:obj], @"This should be true");
-         STAssertTrue([self.notterrible predicatesTIRT:obj], @"This should be true");
+         XCTAssertTrue([self.terrible thisIsReallyTerrible:obj], @"This should be true");
+         XCTAssertTrue([self.notterrible predicatesTIRT:obj], @"This should be true");
      }
      ];
     
     [self.falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
      {
-         STAssertFalse([self.terrible thisIsReallyTerrible:obj], @"This should be false");
-         STAssertFalse([self.notterrible predicatesTIRT:obj], @"This should be false");
+         XCTAssertFalse([self.terrible thisIsReallyTerrible:obj], @"This should be false");
+         XCTAssertFalse([self.notterrible predicatesTIRT:obj], @"This should be false");
      }
      ];
     
-    STAssertTrue([self.terrible thisIsReallyTerrible:@"HCbroken1"], @"Yep, it works");
-    STAssertTrue([self.notterrible predicatesTIRT:@"HCbroken1"], @"This should be true");
-    STAssertFalse([self.terrible thisIsReallyTerrible:@"HCbroken"], @"Yep, it works");
-    STAssertFalse([self.notterrible predicatesTIRT:@"HCbroken"], @"This should be false");
+    XCTAssertTrue([self.terrible thisIsReallyTerrible:@"HCbroken1"], @"Yep, it works");
+    XCTAssertTrue([self.notterrible predicatesTIRT:@"HCbroken1"], @"This should be true");
+    XCTAssertFalse([self.terrible thisIsReallyTerrible:@"HCbroken"], @"Yep, it works");
+    XCTAssertFalse([self.notterrible predicatesTIRT:@"HCbroken"], @"This should be false");
 }
 @end

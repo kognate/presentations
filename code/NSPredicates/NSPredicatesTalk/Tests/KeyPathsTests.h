@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Josh Smith. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface KeyPathsTests : SenTestCase
+@interface KeyPathsTests : XCTestCase
 
 @end

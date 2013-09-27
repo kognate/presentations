@@ -10,7 +10,6 @@
 		400089711632768A00C51D39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400089701632768A00C51D39 /* Foundation.framework */; };
 		400089741632768A00C51D39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 400089731632768A00C51D39 /* main.m */; };
 		400089781632768A00C51D39 /* NSPredicatesTalk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 400089771632768A00C51D39 /* NSPredicatesTalk.1 */; };
-		40008985163276A100C51D39 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40008984163276A100C51D39 /* SenTestingKit.framework */; };
 		40008987163276A100C51D39 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40008986163276A100C51D39 /* Cocoa.framework */; };
 		40008991163276A100C51D39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4000898F163276A100C51D39 /* InfoPlist.strings */; };
 		4000899E1632772600C51D39 /* StringPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4000899D1632772600C51D39 /* StringPredicateTests.m */; };
@@ -42,8 +41,7 @@
 		400089731632768A00C51D39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		400089761632768A00C51D39 /* NSPredicatesTalk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPredicatesTalk-Prefix.pch"; sourceTree = "<group>"; };
 		400089771632768A00C51D39 /* NSPredicatesTalk.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = NSPredicatesTalk.1; sourceTree = "<group>"; };
-		40008983163276A100C51D39 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		40008984163276A100C51D39 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		40008983163276A100C51D39 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40008986163276A100C51D39 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		40008989163276A100C51D39 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		4000898A163276A100C51D39 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -82,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40008985163276A100C51D39 /* SenTestingKit.framework in Frameworks */,
 				40008987163276A100C51D39 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				4000896C1632768A00C51D39 /* NSPredicatesTalk */,
-				40008983163276A100C51D39 /* Tests.octest */,
+				40008983163276A100C51D39 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				400089701632768A00C51D39 /* Foundation.framework */,
-				40008984163276A100C51D39 /* SenTestingKit.framework */,
 				40008986163276A100C51D39 /* Cocoa.framework */,
 				40008988163276A100C51D39 /* Other Frameworks */,
 			);
@@ -233,8 +229,8 @@
 			);
 			name = Tests;
 			productName = Tests;
-			productReference = 40008983163276A100C51D39 /* Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 40008983163276A100C51D39 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -408,7 +404,6 @@
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -421,7 +416,6 @@
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

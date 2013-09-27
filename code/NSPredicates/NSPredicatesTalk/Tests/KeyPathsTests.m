@@ -30,22 +30,22 @@
     NSArray *filtered = [self.keypaths keypaths];
     NSPredicate *_pred = [NSPredicate predicateWithFormat:@"Firstname = %@ or Firstname = %@",@"Sam",@"Alice"];
     NSArray *ar = [filtered filteredArrayUsingPredicate:_pred];
-    STAssertTrue([ar count] == [filtered count], @"only sam and alice");
+    XCTAssertTrue([ar count] == [filtered count], @"only sam and alice");
 }
 
 - (void) testNestingKeyPaths {
     NSArray *filtered = [self.keypaths nesting];
     NSPredicate *_pred = [NSPredicate predicateWithFormat:@"Firstname = %@ or Firstname = %@",@"Sam",@"Alice"];
     NSArray *ar = [filtered filteredArrayUsingPredicate:_pred];
-    STAssertEquals([ar count], [filtered count], @"only sam and alice");
-    STAssertTrue([filtered count] > 0, @"only sam and alice");
+    XCTAssertEqual([ar count], [filtered count], @"only sam and alice");
+    XCTAssertTrue([filtered count] > 0, @"only sam and alice");
 }
 
 - (void) testTooDeep {
-    STAssertThrows([self.keypaths toodeep], @"This throws an error because of the nesting");
+    XCTAssertThrows([self.keypaths toodeep], @"This throws an error because of the nesting");
 }
 
 - (void) testBlockPred {
-    STAssertTrue([self.keypaths blockPredicate], @"blocks work");
+    XCTAssertTrue([self.keypaths blockPredicate], @"blocks work");
 }
 @end
