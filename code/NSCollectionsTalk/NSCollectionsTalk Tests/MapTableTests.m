@@ -36,6 +36,8 @@
 
 - (void)testAwesomeBug
 {
+    
+    // documentation is available online
     NSMapTable *mt = [[NSMapTable alloc] init];
     [mt setObject:@"hello" forKey:@20];
     [mt setObject:@"world" forKey:@"twenty"];

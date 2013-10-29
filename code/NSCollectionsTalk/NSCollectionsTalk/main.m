@@ -31,7 +31,7 @@ int main(int argc, const char * argv[])
         int sum = 0;
         int rounds = 100000;
         for (int i = 0; i < rounds; i++) {
-            int idx = (arc4random() % 100);
+            int idx = arc4random_uniform(100);
             NSUInteger found_idx = [s indexGreaterThanIndex:idx];
             if (found_idx != NSNotFound) {
                 sum += [[table objectForKey:@(found_idx)] intValue];

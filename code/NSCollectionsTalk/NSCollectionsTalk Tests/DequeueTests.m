@@ -28,4 +28,20 @@
     XCTAssertTrue([lastItem isEqualToString:@"Third"], @"The First!");
 }
 
+- (void) testEnumeration {
+    UsingDequeue *queue = [[UsingDequeue alloc] init];
+    [queue push:@10];
+    [queue push:@20];
+    [queue push:@"done!"];
+    
+    XCTAssertTrue([queue length] == 3, @"should be 3 items");
+
+    for (id obj in queue)
+    {
+        NSLog(@"%@",obj);
+    }
+    
+    XCTAssertTrue([queue length] == 3, @"should be 3 items");
+}
+
 @end

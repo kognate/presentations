@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		406C1B1E181C5601005F0A0D /* Things.m in Sources */ = {isa = PBXBuildFile; fileRef = 406C1B1D181C5601005F0A0D /* Things.m */; };
+		406C1B21181C5731005F0A0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 406C1B1F181C5731005F0A0D /* Model.xcdatamodeld */; };
 		407B96C417F501CD009C74A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407B96C317F501CD009C74A0 /* Foundation.framework */; };
 		407B96C717F501CD009C74A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 407B96C617F501CD009C74A0 /* main.m */; };
 		407B96CB17F501CD009C74A0 /* NSCollectionsTalk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 407B96CA17F501CD009C74A0 /* NSCollectionsTalk.1 */; };
@@ -49,6 +51,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		406C1B1C181C5601005F0A0D /* Things.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Things.h; sourceTree = "<group>"; };
+		406C1B1D181C5601005F0A0D /* Things.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Things.m; sourceTree = "<group>"; };
+		406C1B20181C5731005F0A0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		407B96C017F501CD009C74A0 /* NSCollectionsTalk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NSCollectionsTalk; sourceTree = BUILT_PRODUCTS_DIR; };
 		407B96C317F501CD009C74A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		407B96C617F501CD009C74A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,6 +100,7 @@
 		407B96B717F501CD009C74A0 = {
 			isa = PBXGroup;
 			children = (
+				406C1B1F181C5731005F0A0D /* Model.xcdatamodeld */,
 				407B96C517F501CD009C74A0 /* NSCollectionsTalk */,
 				407B96D817F501FD009C74A0 /* NSCollectionsTalk Tests */,
 				407B96C217F501CD009C74A0 /* Frameworks */,
@@ -145,6 +151,8 @@
 				407B96DE17F501FD009C74A0 /* NSCollectionsTalk_Tests.m */,
 				407B96D917F501FD009C74A0 /* Supporting Files */,
 				407B96EB17F50254009C74A0 /* DequeueTests.m */,
+				406C1B1C181C5601005F0A0D /* Things.h */,
+				406C1B1D181C5601005F0A0D /* Things.m */,
 				407B96F417F50A2E009C74A0 /* CArray.m */,
 				407B96F617F50B0B009C74A0 /* CFTree.m */,
 				407B96FD17F51377009C74A0 /* HeyNSOrderedSet.m */,
@@ -275,11 +283,13 @@
 				407B96DF17F501FD009C74A0 /* NSCollectionsTalk_Tests.m in Sources */,
 				407B970A17F52DE3009C74A0 /* MapTableTests.m in Sources */,
 				407B96F517F50A2E009C74A0 /* CArray.m in Sources */,
+				406C1B1E181C5601005F0A0D /* Things.m in Sources */,
 				407B970217F5178D009C74A0 /* OhHaiIndexSet.m in Sources */,
 				407B970417F51FAC009C74A0 /* CountedSet.m in Sources */,
 				407B970617F52761009C74A0 /* PointerArray.m in Sources */,
 				407B96E917F50216009C74A0 /* UsingDequeue.mm in Sources */,
 				407B96EC17F50254009C74A0 /* DequeueTests.m in Sources */,
+				406C1B21181C5731005F0A0D /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +466,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		406C1B1F181C5731005F0A0D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				406C1B20181C5731005F0A0D /* Model.xcdatamodel */,
+			);
+			currentVersion = 406C1B20181C5731005F0A0D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 407B96B817F501CD009C74A0 /* Project object */;
 }
