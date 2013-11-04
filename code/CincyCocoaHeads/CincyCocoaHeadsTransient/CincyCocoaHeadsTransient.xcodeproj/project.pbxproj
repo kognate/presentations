@@ -27,6 +27,10 @@
 		40A747FE17BF422D000F973C /* CincyCocoaHeadsTransientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A747FD17BF422D000F973C /* CincyCocoaHeadsTransientTests.m */; };
 		40A7480917BF4288000F973C /* SecretMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A7480817BF4288000F973C /* SecretMessage.m */; };
 		40A7480B17BF4390000F973C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A7480A17BF4390000F973C /* Security.framework */; };
+		40C622161823DD460004879D /* RCWKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C622151823DD460004879D /* RCWKeyChain.m */; };
+		40C622171823DD460004879D /* RCWKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C622151823DD460004879D /* RCWKeyChain.m */; };
+		40C6221A1823E0960004879D /* RCWSecretSauce.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C622191823E0960004879D /* RCWSecretSauce.m */; };
+		40C6221B1823E0960004879D /* RCWSecretSauce.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C622191823E0960004879D /* RCWSecretSauce.m */; };
 		40E7953117C487F8001BFBD7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -67,6 +71,10 @@
 		40A7480717BF4288000F973C /* SecretMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretMessage.h; sourceTree = "<group>"; };
 		40A7480817BF4288000F973C /* SecretMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretMessage.m; sourceTree = "<group>"; };
 		40A7480A17BF4390000F973C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		40C622141823DD460004879D /* RCWKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCWKeyChain.h; sourceTree = "<group>"; };
+		40C622151823DD460004879D /* RCWKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCWKeyChain.m; sourceTree = "<group>"; };
+		40C622181823E0960004879D /* RCWSecretSauce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCWSecretSauce.h; sourceTree = "<group>"; };
+		40C622191823E0960004879D /* RCWSecretSauce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCWSecretSauce.m; sourceTree = "<group>"; };
 		40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		40E7953017C487F8001BFBD7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +109,10 @@
 		40A747BD17BF422D000F973C = {
 			isa = PBXGroup;
 			children = (
+				40C622181823E0960004879D /* RCWSecretSauce.h */,
+				40C622191823E0960004879D /* RCWSecretSauce.m */,
+				40C622141823DD460004879D /* RCWKeyChain.h */,
+				40C622151823DD460004879D /* RCWKeyChain.m */,
 				40E7952F17C487F8001BFBD7 /* KeychainItemWrapper.m */,
 				40E7953017C487F8001BFBD7 /* KeychainItemWrapper.h */,
 				40A747D117BF422D000F973C /* CincyCocoaHeadsTransient */,
@@ -278,10 +290,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C622161823DD460004879D /* RCWKeyChain.m in Sources */,
 				40A747D817BF422D000F973C /* main.m in Sources */,
 				40A747DC17BF422D000F973C /* RCWAppDelegate.m in Sources */,
 				40A747E817BF422D000F973C /* RCWFlipsideViewController.m in Sources */,
 				40A747E517BF422D000F973C /* RCWMainViewController.m in Sources */,
+				40C6221A1823E0960004879D /* RCWSecretSauce.m in Sources */,
 				40A747E217BF422D000F973C /* CincyCocoaHeadsTransient.xcdatamodeld in Sources */,
 				40A7480917BF4288000F973C /* SecretMessage.m in Sources */,
 				40E7953117C487F8001BFBD7 /* KeychainItemWrapper.m in Sources */,
@@ -292,7 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C622171823DD460004879D /* RCWKeyChain.m in Sources */,
 				40A747FE17BF422D000F973C /* CincyCocoaHeadsTransientTests.m in Sources */,
+				40C6221B1823E0960004879D /* RCWSecretSauce.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

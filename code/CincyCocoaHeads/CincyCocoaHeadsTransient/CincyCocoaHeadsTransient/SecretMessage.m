@@ -30,7 +30,7 @@ NSData* encryptString(NSString* plaintext, NSData* key, NSData* iv)
                                               kCCAlgorithmAES128,
                                               kCCOptionPKCS7Padding,
                                               [key bytes],
-                                              kCCKeySizeAES256,
+                                                ,
                                               [iv bytes],
                                               [plaintextData bytes],
                                               [plaintextData length],
