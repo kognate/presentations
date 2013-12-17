@@ -1,0 +1,907 @@
+--- script 
+
+a predicate is a query
+
+It's for string stuff, filtering arrays, Core Data, and spotlight
+
+
+You may have seen them in core data.  First, lets talk about
+NSExpressions.
+
+--- clip
+
+- (void)testSimpleAddition
+{
+    NSExpression *expression = [NSExpression expressionWithFormat:@"3 + 2"];
+    NSNumber *result = [expression expressionValueWithObject:nil
+    context:nil];
+    XCTAssert([result intValue] == 5, @"I'm five");
+}
+
+--- script
+
+and we can do complex things
+
+--- clip
+
+- (void) testComplicatedAddition
+{
+    NSExpression *expression = [NSExpression expressionWithFormat:@"(3 + 2) + (3 * 2)"];
+    NSNumber *result = [expression expressionValueWithObject:nil
+    context:nil];
+    XCTAssert([result intValue] == 11, @"I'm eleven");
+}
+
+--- script 
+
+and we can operate on unboxed numbers
+
+--- clip 
+
+- (void) testNSNumberAddition
+{
+    NSExpression *array = [NSExpression expressionForConstantValue:@[ @5, @6]];
+    NSExpression *toEvaluate = [NSExpression
+    expressionForFunction:@"sum:" arguments:@[ array ]];
+    NSNumber *result = [toEvaluate expressionValueWithObject:nil
+    context:nil];
+    XCTAssert([result intValue] == 11, @"I am 11");
+}
+
+--- script 
+
+and we can build predicates
+
+--- clip
+
+- (void) testBuildPredicate
+{
+    NSExpression *lhs = [NSExpression expressionWithFormat:@"self"];
+    NSExpression *rhs = [NSExpression
+    expressionWithFormat:@"%@",@"hello"];
+    NSPredicate *predicate = [NSComparisonPredicate
+    predicateWithLeftExpression:lhs
+                rightExpression:rhs
+                       modifier:NSDirectPredicateModifier
+                           type:NSEqualToPredicateOperatorType
+                        options:NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption];
+    XCTAssert([predicate evaluateWithObject:@"hello"], @"I'm a working predicate");
+}
+
+--- script
+
+We can also build them in an easier way
+
+--- clip
+
+- (void) testSimple
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"1 == 1"];
+    XCTAssert([predicate evaluateWithObject:nil], @"Reality is not broken");
+    
+    predicate = [NSPredicate predicateWithFormat:@"2 > 1"];
+    XCTAssert([predicate evaluateWithObject:nil], @"Reality is not broken");
+    
+    predicate = [NSPredicate predicateWithFormat:@"1 < 2"];
+    XCTAssert([predicate evaluateWithObject:nil], @"Reality is not broken");
+}
+
+--- script 
+
+we can even build them up with formats
+
+--- clip
+
+- (void) testSimpleTwo
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self == 1"];
+    XCTAssert([predicate evaluateWithObject:@1], @"Reality is not broken");
+    
+    predicate = [NSPredicate predicateWithFormat:@"self > 1"];
+    XCTAssert([predicate evaluateWithObject:@2], @"Reality is not broken");
+    
+    predicate = [NSPredicate predicateWithFormat:@"1 < self"];
+    XCTAssert([predicate evaluateWithObject:@2], @"Reality is not broken");
+}
+
+--- script
+
+we can also do keypaths
+
+--- clip
+
+@interface NestKey : NSObject
+@property (strong) NSNumber *key;
+@end
+
+@implementation NestKey
+@end
+
+
+@interface ToNest : NSObject
+@property (strong) NestKey *nested;
+@end
+
+@implementation ToNest
+@end
+
+@interface KPStuff : NSObject
+@property (strong) ToNest *one;
+@end
+
+@implementation KPStuff
+@end
+
+--- clip
+
+- (void) testKeyPaths
+{
+    
+    KPStuff *stuff = [[KPStuff alloc] init];
+    stuff.one = [[ToNest alloc] init];
+    stuff.one.nested = [[NestKey alloc] init];
+    stuff.one.nested.key = @10;
+    
+    [stuff setValue:@10 forKeyPath:@"one.nested.key"];
+    NSPredicate *kppred = [NSPredicate predicateWithFormat:@"self.one.nested.key == %@",@10];
+    XCTAssert([kppred evaluateWithObject:stuff], @"it works!");
+    
+}
+
+--- script
+
+we can check between
+
+--- clip
+
+- (void) testBetween
+{
+    NSPredicate *find = [NSPredicate predicateWithFormat:@"self between {2,5}"];
+    XCTAssert([find evaluateWithObject:@3], @"three is between 2 and 5");
+    XCTAssert([find evaluateWithObject:@2], @"two is between 2 and 5");
+    XCTAssertFalse([find evaluateWithObject:@6], @"six is not");
+}
+
+--- script
+
+we can do dates between
+
+--- clip
+
+- (void) testDatesBetween
+{
+    NSDate *start = [NSDate dateWithTimeIntervalSinceNow:-30];
+    NSDate *end = [NSDate dateWithTimeIntervalSinceNow:10];
+    NSPredicate *toCheck = [NSPredicate predicateWithFormat:@"self between {%@,%@}",start,end];
+    XCTAssert([toCheck evaluateWithObject:[NSDate date]], @"currently in range");
+    XCTAssertFalse([toCheck evaluateWithObject:[NSDate dateWithTimeIntervalSince1970:0]], @"but I'm not");
+}
+
+--- script
+
+we can check in a set
+
+--- clip
+
+- (void) testIn
+{
+    NSSet *checkIn = [NSSet setWithObjects:@"Bob",@"Bill", @"Jim", nil];
+    NSPredicate *toCheck = [NSPredicate predicateWithFormat:@"self in %@",checkIn];
+    
+    XCTAssert([toCheck evaluateWithObject:@"Bill"], @"Bill is in");
+
+    NSPredicate *nextCheck = [NSPredicate predicateWithFormat:@"self in {%@}", @"Sam"];
+    XCTAssert([nextCheck evaluateWithObject:@"Sam"], @"Sam is in");
+}
+
+--- script
+
+but you probably would only use most of these as filters.  
+on collections.
+
+--- clip
+
+- (void)testFilter
+{
+    NSArray *toFilter = @[ @1, @2, @3, @4, @5, @6 ];
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"self > 4"];
+    NSArray *result = [toFilter filteredArrayUsingPredicate:filter];
+
+    XCTAssert([result count] == 2, @"I'm filtered");
+    XCTAssert([result[0] intValue] == 5, @"I'm five");
+}
+
+--- script
+
+mutable filters in place
+
+--- clip
+
+- (void) testMutableFilter
+{
+    NSMutableArray *filterInPlace = [@[ @1, @2, @3, @4, @5, @6 ] mutableCopy];
+    XCTAssert([filterInPlace count] == 6, @"I have six");
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"self > 4"];
+    
+    [filterInPlace filterUsingPredicate:filter];
+    
+    XCTAssert([filterInPlace count] == 2, @"I have two");
+    XCTAssert([filterInPlace[0] intValue] == 5, @"I'm five");
+}
+
+--- script
+
+we also have aggregate operations, like ANY
+
+--- clip
+
+- (void) testAny
+{
+    NSArray *toCheck = @[ @1, @2, @3, @4, @5, @6 ];
+    NSPredicate *check = [NSPredicate predicateWithFormat:@"ANY self > 5"];
+    XCTAssert([check evaluateWithObject:toCheck], @"I have some values over 5");
+    
+    // this works for sets, too
+    NSSet *toCheckSet = [NSSet setWithObjects:@1, @2, @3, @4, @5, @6, nil];
+    XCTAssert([check evaluateWithObject:toCheckSet], @"I have some values over 5");
+    
+    // even NSCountedSets
+    NSCountedSet *toCheckCounted = [NSCountedSet setWithObjects:@1, @2, @3, @4, @5, @6, nil];
+    XCTAssert([check evaluateWithObject:toCheckCounted], @"I have some values over 5");
+}
+
+--- script
+
+and all
+
+--- clip
+
+- (void) testAll
+{
+    NSArray *toCheck = @[ @1, @2, @3, @4, @5, @6 ];
+    NSPredicate *check = [NSPredicate predicateWithFormat:@"ALL self > 5"];
+    XCTAssertFalse([check evaluateWithObject:toCheck], @"Not all of my values are over 5");
+    
+    NSPredicate *nextCheck = [NSPredicate predicateWithFormat:@"ALL self < 10"];
+    XCTAssert([nextCheck evaluateWithObject:toCheck], @"All of my values are less than 10");
+    
+}
+
+--- script
+
+and none
+
+--- clip 
+
+- (void) testNone
+{
+    NSArray *toCheck = @[ @1, @2, @3, @4, @5, @6 ];
+    NSPredicate *check = [NSPredicate predicateWithFormat:@"NONE self > 10"];
+    XCTAssert([check evaluateWithObject:toCheck], @"None of my values are greater than 10");
+}
+
+--- script
+
+We can also look at lengths
+
+--- clip
+
+- (void) testLength
+{
+    NSArray *toCheck = @[ @1, @2, @3, @4, @5, @6 ];
+    NSPredicate *check = [NSPredicate predicateWithFormat:@"self[SIZE] == 6"];
+    XCTAssert([check evaluateWithObject:toCheck], @"I'm good");
+    
+    XCTAssertThrows([check evaluateWithObject:@"hello!"], @"No length for strings");
+    NSPredicate *nextCheck = [NSPredicate
+    predicateWithFormat:@"self.length == 6"];
+    XCTAssert([nextCheck evaluateWithObject:@"hello!"], @"I'm good");
+
+}
+
+--- script
+
+We can build up predicates from parts, like and
+
+--- clip
+
+- (void) testAnd
+{
+    NSPredicate *first = [NSPredicate predicateWithFormat:@"self > 5"];
+    NSPredicate *second = [NSPredicate predicateWithFormat:@"self < 10"];
+    NSPredicate *all = [NSCompoundPredicate andPredicateWithSubpredicates:@[ first, second]];
+    XCTAssert([all evaluateWithObject:@6], @"six works");
+    XCTAssertFalse([all evaluateWithObject:@11], @"11 doesn't");
+}
+
+--- script
+
+or OR
+
+--- clip
+
+- (void) testOr
+{
+    NSPredicate *first = [NSPredicate predicateWithFormat:@"self > 5"];
+    NSPredicate *second = [NSPredicate predicateWithFormat:@"self < 10"];
+    NSPredicate *all = [NSCompoundPredicate orPredicateWithSubpredicates:@[ first, second]];
+    XCTAssert([all evaluateWithObject:@6], @"six works");
+    XCTAssert([all evaluateWithObject:@11], @"11 works now");
+}
+
+--- script
+
+or NOT
+
+--- clip 
+
+- (void) testNot
+{
+    
+    NSPredicate *first = [NSPredicate predicateWithFormat:@"self > 5"];
+    NSPredicate *notFirst = [NSCompoundPredicate notPredicateWithSubpredicate:first];
+    XCTAssertFalse([notFirst evaluateWithObject:@6], @"six doesn't work");
+    XCTAssert([notFirst evaluateWithObject:@3], @"3 works");
+    
+}
+
+--- script
+
+We can also use them on strings. 
+There are six methods:  == beginswith, endswith, contains, like, and matches
+
+--- clip
+
+- (void) testEquality
+{
+    NSString *target = @"hello";
+    NSPredicate *equal = [NSPredicate predicateWithFormat:@"self = %@",target];
+    XCTAssertFalse([equal evaluateWithObject:@"world"], @"Nope");
+    XCTAssertTrue([equal evaluateWithObject:@"hello"], @"Yep");
+}
+
+--- script
+
+contains
+
+--- clip
+
+- (void) testContains
+{
+    NSString *target = @"hello world";
+    NSPredicate *greeting = [NSPredicate predicateWithFormat:@"self contains %@",@"hello"];
+    XCTAssertTrue([greeting evaluateWithObject:target], @"I contain hello");
+
+    NSPredicate *contains = [NSPredicate predicateWithFormat:@"self contains[cd] %@",@"hello"];
+    
+    XCTAssertTrue([contains evaluateWithObject:@"hello world"],@"");
+    XCTAssertTrue([contains evaluateWithObject:@"Hello World"],@"");
+    XCTAssertTrue([contains evaluateWithObject:@"atlant! Hello!"],@"");
+    XCTAssertFalse([contains evaluateWithObject:@"Atlanta!"],@"");
+}
+
+--- script
+
+begins with
+
+--- clip
+
+- (void) testBeginsWith
+{
+    NSPredicate *beginswith = [NSPredicate predicateWithFormat:@"self beginswith %@",@"hello"];
+    
+    XCTAssertTrue([beginswith evaluateWithObject:@"hello world"],@"");
+    XCTAssertFalse([beginswith evaluateWithObject:@"Hello World"],@"");
+    XCTAssertFalse([beginswith evaluateWithObject:@"codemash! Hello!"],@"");
+}
+
+--- script
+
+
+ends with
+
+--- clip
+
+- (void) testEndsWith
+{
+    NSPredicate *endswith = [NSPredicate predicateWithFormat:@"self endswith %@",@"hello"];
+    XCTAssertTrue([endswith evaluateWithObject:@"world hello"],@"");
+    XCTAssertFalse([endswith evaluateWithObject:@"Hello World"],@"");
+    XCTAssertFalse([endswith evaluateWithObject:@"codemash! Hello!"],@"");
+    XCTAssertFalse([endswith evaluateWithObject:@"codemash!"],@"");
+    
+}
+
+--- script
+
+like
+
+
+--- clip
+
+- (void)testLike
+{
+    NSPredicate *like = [NSPredicate predicateWithFormat:@"self like %@",@"*star?"];
+    XCTAssertFalse([like evaluateWithObject:@"destared"],@"");
+    XCTAssertFalse([like evaluateWithObject:@"is staring"],@"");
+    XCTAssertTrue([like evaluateWithObject:@"stars"], @"");
+    XCTAssertTrue([like evaluateWithObject:@"deathstart"], @"");
+    XCTAssertFalse([like evaluateWithObject:@"   "], @"");
+}
+
+--- script
+
+matches
+
+--- clip
+
+- (void) testMatches
+{
+    NSPredicate *match = [NSPredicate predicateWithFormat:@"self matches '\\\\d+[a-z]'"];
+    XCTAssertFalse([match evaluateWithObject:@"0A"],@"");
+    XCTAssertTrue([match evaluateWithObject:@"0a"],@"");
+    XCTAssertFalse([match evaluateWithObject:@"000000ab"],@"");
+    XCTAssertTrue([match evaluateWithObject:@"000000c"],@"");
+}
+
+--- script
+
+matches validation
+
+--- clip
+
+- (void) testMatchesValidation
+{
+    NSString *email = @"kognate@gmail.com";
+    NSString *bademail = @"kognate@gmail. com";
+    NSPredicate *_emailValid = [NSPredicate predicateWithFormat:@"self matches '[a-z+]+@[a-z]+\\\\.com'"];
+    XCTAssertTrue([_emailValid evaluateWithObject:email], @"This email works");
+    XCTAssertFalse([_emailValid evaluateWithObject:bademail], @"This one doesn't");
+}
+
+--- script
+
+we can also template them.
+
+--- clip
+
+- (void) testTemplatedBegins
+{
+    NSPredicate *template = [NSPredicate predicateWithFormat:@"self = $MYSTRING"];
+    
+    NSPredicate *instance = [template predicateWithSubstitutionVariables:@{@"MYSTRING": @"Atlanta"}];
+    XCTAssertTrue([instance evaluateWithObject:@"Atlanta"], @"Yep, atlanta");
+    XCTAssertFalse([instance evaluateWithObject:@"Boston"], @"Wait a minute...?");
+}
+
+--- script
+
+OK, who cares?  Show me something real.
+
+--- clip
+
+BOOL thisIsTerrible(NSString * _myarg) {
+    BOOL _res = NO;
+    if ([[_myarg substringToIndex:2] isEqualToString:@"CH"]) {
+        if ([_myarg length] > 3) {
+            if ([[_myarg componentsSeparatedByString:@"broken"] count] == 1) {
+                if ([_myarg length] < 20) {
+                    NSCharacterSet *s = [NSCharacterSet decimalDigitCharacterSet];
+                    if ([[_myarg componentsSeparatedByCharactersInSet:s] count] > 1) {
+                        if ([[_myarg componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] count] == 1) {
+                            _res = YES;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return _res;
+}
+
+--- script
+
+this is terrible 
+
+--- clip
+
+BOOL thisIsTerrible(NSString * _myarg) {
+    BOOL _res = NO;
+    if ([[_myarg substringToIndex:2] isEqualToString:@"CH"]) {
+        if ([_myarg length] > 3) {
+            if ([[_myarg componentsSeparatedByString:@"broken"] count] == 1) {
+                if ([_myarg length] < 20) {
+                    NSCharacterSet *s = [NSCharacterSet decimalDigitCharacterSet];
+                    if ([[_myarg componentsSeparatedByCharactersInSet:s] count] > 1) {
+                        if ([[_myarg componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] count] == 1) {
+                            _res = YES;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return _res;
+}
+
+--- clip
+
+- (void) testTerrible {
+    NSArray *truestrings = @[ @"CH1hello",@"CH00"];
+    NSArray *falsestrings = @[ @"CH1hello ",@"HH1hello", @"CH", @"CHbroken1",
+                           @"CHaaafdddddddsssajjajjajfjfjjajfjajjf1"];
+    
+    [truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertTrue(thisIsTerrible(obj), @"This should be true");
+     }];
+    
+    [falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertFalse(thisIsTerrible(obj), @"This should be false");
+     }];
+}
+
+--- script
+
+or we can solve this with predicates
+
+--- clip
+
+    BOOL predicatesThisIsTerrible(NSString *_myarg) {
+    NSPredicate *beginsWithCH = [NSPredicate predicateWithFormat:@"SELF beginswith 'CH'"];
+    NSPredicate *longEnough = [NSPredicate predicateWithFormat:@"SELF.length > 3"];
+    NSPredicate *shortEnough = [NSPredicate predicateWithFormat:@"SELF.length < 20"];
+    NSPredicate *containsDigit = [NSPredicate predicateWithFormat:@"SELF matches '.*\\\\d.*'"];
+    NSPredicate *containsSpace = [NSPredicate predicateWithFormat:@"SELF contains ' '"];
+    NSPredicate *containsBroken = [NSPredicate predicateWithFormat:@"SELF contains 'broken'"];
+    NSPredicate *notContainsBroken = [NSCompoundPredicate notPredicateWithSubpredicate:containsBroken];
+    NSPredicate *notContainsSpace = [NSCompoundPredicate notPredicateWithSubpredicate:containsSpace];
+    
+    NSArray *_preds = @[ beginsWithCH, longEnough, shortEnough, notContainsBroken,
+                         notContainsSpace, containsDigit];
+    
+    NSPredicate *main = [NSCompoundPredicate andPredicateWithSubpredicates:_preds];
+    return [main evaluateWithObject:_myarg];
+}
+
+--- clip
+
+- (void) testPredicateTerrible {
+    NSArray *truestrings = @[ @"CH1hello",@"CH00"];
+    NSArray *falsestrings = @[ @"CH1hello ",@"HH1hello", @"CH", @"CHbroken1",
+                               @"CHaaafdddddddsssajjajjajfjfjjajfjajjf1"];
+    
+    [truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertTrue(predicatesThisIsTerrible(obj), @"This should be true");
+     }];
+    
+    [falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertFalse(predicatesThisIsTerrible(obj), @"This should be false");
+     }];
+}
+
+--- script
+
+we can even shorten these
+
+--- clip
+
+BOOL predicatesThisIsTerribleShort(NSString *_myarg) {
+    
+    NSPredicate *one = [NSPredicate predicateWithFormat:@"SELF beginswith 'CH'"];
+    NSPredicate *two = [NSPredicate predicateWithFormat:@"SELF.length > 3 AND self.length < 20"];
+    
+    NSString *lps = @"SELF matches '.*\\\\d.*' and NOT(SELF contains ' ') and NOT(SELF contains 'broken')";
+    NSPredicate *three = [NSPredicate predicateWithFormat:lps];
+    
+    NSArray *_preds = @[ one, two, three ];
+    NSPredicate *main = [NSCompoundPredicate andPredicateWithSubpredicates:_preds];
+    return [main evaluateWithObject:_myarg];
+}
+
+--- clip
+
+- (void) testPredicateTerribleShort {
+    NSArray *truestrings = @[ @"CH1hello",@"CH00"];
+    NSArray *falsestrings = @[ @"CH1hello ",@"HH1hello", @"CH", @"CHbroken1",
+                               @"CHaaafdddddddsssajjajjajfjfjjajfjajjf1"];
+    
+    [truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertTrue(predicatesThisIsTerribleShort(obj), @"This should be true");
+     }];
+    
+    [falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertFalse(predicatesThisIsTerribleShort(obj), @"This should be true");
+     }];
+}
+
+--- script
+
+but then things change
+
+--- clip
+
+BOOL thisIsReallyTerrible(NSString *_myarg) {
+    BOOL _res = NO;
+    if ([_myarg length] > 3) {
+        if ([_myarg length] < 20) {
+            NSCharacterSet *s = [NSCharacterSet decimalDigitCharacterSet];
+            if ([[_myarg componentsSeparatedByCharactersInSet:s] count] > 1) {
+                NSCharacterSet *w = [NSCharacterSet whitespaceCharacterSet];
+                if ([[_myarg componentsSeparatedByCharactersInSet:w] count] == 1) {
+                    if ([[_myarg substringToIndex:2] isEqualToString:@"CH"]) {
+                        if ([[_myarg componentsSeparatedByString:@"broken"] count] == 1) {
+                            _res = YES;
+                        }
+                    } else if ([[_myarg substringToIndex:2] isEqualToString:@"HC"]) {
+                        if ([[_myarg componentsSeparatedByString:@"broken"] count] > 1) {
+                            _res = YES;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return _res;
+}
+
+--- clip
+
+- (void) testIsThisReallyTerrible {
+    NSArray *truestrings = @[ @"CH1hello",@"CH00"];
+    NSArray *falsestrings = @[ @"CH1hello ",@"HH1hello", @"CH", @"CHbroken1",
+                               @"CHaaafdddddddsssajjajjajfjfjjajfjajjf1"];
+
+    [truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertTrue(thisIsReallyTerrible(obj), @"This should be true");
+     }
+     ];
+    
+    [falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertFalse(thisIsReallyTerrible(obj), @"This should be true");
+     }
+     ];
+    
+    XCTAssertTrue(thisIsReallyTerrible(@"HCbroken1"), @"Yep, it works");
+    XCTAssertFalse(thisIsReallyTerrible(@"HCbroken"), @"Yep, it works");
+}
+
+--- script
+
+if we'd used predicates, it would have been better
+
+--- clip
+
+BOOL predicatesTIRT(NSString *_myarg) {
+    NSPredicate *beginsWithCH = [NSPredicate predicateWithFormat:@"SELF beginswith 'CH'"];
+    NSPredicate *beginsWithHC = [NSPredicate predicateWithFormat:@"SELF beginswith 'HC'"];
+    NSPredicate *longEnough = [NSPredicate predicateWithFormat:@"SELF.length > 3"];
+    NSPredicate *shortEnough = [NSPredicate predicateWithFormat:@"SELF.length < 20"];
+    NSPredicate *containsDigit = [NSPredicate predicateWithFormat:@"SELF matches '.*\\\\d.*'"];
+    NSPredicate *containsSpace = [NSPredicate predicateWithFormat:@"SELF contains ' '"];
+    NSPredicate *containsBroken = [NSPredicate predicateWithFormat:@"SELF contains 'broken'"];
+    NSPredicate *notCB = [NSCompoundPredicate notPredicateWithSubpredicate:containsBroken];
+    NSPredicate *notCS = [NSCompoundPredicate notPredicateWithSubpredicate:containsSpace];
+    
+    NSArray *_ch = [NSArray arrayWithObjects:beginsWithCH,notCB, nil];
+    NSPredicate *chnotbroken = [NSCompoundPredicate andPredicateWithSubpredicates:_ch];
+    NSArray *_hc = [NSArray arrayWithObjects:beginsWithHC,containsBroken,nil];
+    NSPredicate *hcbroken = [NSCompoundPredicate andPredicateWithSubpredicates:_hc];
+    
+    NSArray *_chhc = [NSArray arrayWithObjects:chnotbroken,hcbroken, nil];
+    NSPredicate *begins = [NSCompoundPredicate orPredicateWithSubpredicates:_chhc];
+    
+    NSArray *_preds = [NSArray arrayWithObjects:begins,
+                       longEnough,
+                       shortEnough,
+                       containsDigit,
+                       notCS,
+                       nil];
+    
+    NSPredicate *main = [NSCompoundPredicate andPredicateWithSubpredicates:_preds];
+    return [main evaluateWithObject:_myarg];
+}
+
+- (void) testIsThisReallyTerriblePredicates {
+    NSArray *truestrings = @[ @"CH1hello",@"CH00"];
+    NSArray *falsestrings = @[ @"CH1hello ",@"HH1hello", @"CH", @"CHbroken1",
+                               @"CHaaafdddddddsssajjajjajfjfjjajfjajjf1"];
+    
+    [truestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertTrue(predicatesTIRT(obj), @"This should be true");
+     }
+     ];
+    
+    [falsestrings enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop)
+     {
+         XCTAssertFalse(predicatesTIRT(obj), @"This should be true");
+     }
+     ];
+    
+    XCTAssertTrue(predicatesTIRT(@"HCbroken1"), @"Yep, it works");
+    XCTAssertFalse(predicatesTIRT(@"HCbroken"), @"Yep, it works");
+}
+
+--- script
+
+core data:
+
+employee.name employee.salary
+manager.departmentName, manager.name
+allManagers TRUEPREDICATE
+
+--- script
+
+subquery, setup
+
+--- clip
+
+#import "Employee.h"
+#import "Manager.h"
+
+@interface RCWMainViewController ()
+@property (weak) NSManagedObjectContext *context;
+@property (weak) NSManagedObjectModel *model;
+@end
+
+--- clip 
+
+- (void) generateSampleData
+{
+    
+
+    Manager *mng = [NSEntityDescription insertNewObjectForEntityForName:@"Manager"
+                                                 inManagedObjectContext:self.managedObjectContext];
+    mng.name = @"Grace";
+    mng.departmentName = @"CodeMonkeys";
+    NSMutableSet *emps = [mng mutableSetValueForKey:@"employees"];
+    
+    Employee *bill = [NSEntityDescription insertNewObjectForEntityForName:@"Employee"
+                                                   inManagedObjectContext:self.managedObjectContext];
+    bill.name = @"Bill";
+    bill.salary = @80000;
+    
+    Employee *jill = [NSEntityDescription insertNewObjectForEntityForName:@"Employee"
+                                                   inManagedObjectContext:self.managedObjectContext];
+    jill.name = @"Jill";
+    jill.salary = @91000;
+    
+    Employee *will = [NSEntityDescription insertNewObjectForEntityForName:@"Employee"
+                                                   inManagedObjectContext:self.managedObjectContext];
+    will.name = @"Will";
+    will.salary = @90100;
+    
+    [emps addObjectsFromArray:@[ bill, jill, will]];
+    mng.employees = emps;
+    
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
+}
+
+--- clip
+
+    RCWAppDelegate *del = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = del.managedObjectContext;
+    self.model = del.managedObjectModel;
+    [self generateSampleData];
+
+--- clip
+
+- (void) subquery
+{
+// Subquery
+
+    NSFetchRequest *_fetch = [[NSFetchRequest alloc] initWithEntityName:@"Manager"];
+    NSPredicate *_pred = [NSPredicate predicateWithFormat:@"SUBQUERY(employees,$e, $e.salary > 90000).@count > 0"];
+    [_fetch setPredicate:_pred];
+    NSError *error = nil;
+    NSArray *res = [self.managedObjectContext executeFetchRequest:_fetch error:&error];
+    NSLog(@"Expensive Manager %@",[[res lastObject] valueForKey:@"name"]);
+}
+
+--- clip
+
+[self subquery];
+
+--- script
+
+subquery the hard way
+
+--- clip
+
+- (void) theHardWay
+{
+    // Get the managers who have employees with salarys > 90000
+    // The hard way
+    
+    NSFetchRequest *_emps = [[NSFetchRequest alloc] initWithEntityName:@"Employee"];
+    NSPredicate *_salarypred = [NSPredicate predicateWithFormat:@"salary > 90000"];
+    
+    [_emps setPredicate:_salarypred];
+    NSError *error = error;
+    NSArray *_empsSalary = [self.managedObjectContext executeFetchRequest:_emps error:&error];
+    __block NSMutableSet *expensive = [[NSMutableSet alloc] init];
+    [_empsSalary enumerateObjectsUsingBlock:^(Employee *e,NSUInteger idx, BOOL *stop) {
+        [expensive addObject:e];
+    }];
+    
+    NSLog(@"Expensive Manager: %@",[[[expensive anyObject] valueForKey:@"manager"] valueForKey:@"name"]);
+}
+
+--- clip
+
+   [self theHardWay];
+
+--- script
+
+we can also store predicates in the model
+
+--- clip
+
+- (void) simpleFetchModel
+{
+    // fetch request stored in the model
+    
+    NSFetchRequest *fetchManagers = [self.model fetchRequestFromTemplateWithName:@"allManagers"
+                                                                     substitutionVariables:@{}];
+    
+    NSError *error = nil;
+    NSArray *managers = [self.managedObjectContext executeFetchRequest:fetchManagers error:&error];
+    NSLog(@"First Manager: %@",[[managers lastObject] valueForKey:@"name"]);
+
+}
+
+--- clip
+
+    [self simpleFetchModel];
+
+--- clip
+
+- (void) anotherModelFetch
+{
+    // fetch request stored in the model
+    
+    NSFetchRequest *fetchEE = [self.model fetchRequestFromTemplateWithName:@"expensiveEmployees"
+                                                           substitutionVariables:@{}];
+     NSError *error = nil;
+    NSArray *expensive = [self.managedObjectContext executeFetchRequest:fetchEE error:&error];
+    NSLog(@"Expensive Employees: %@", expensive);
+}
+
+--- clip
+
+    [self anotherModelFetch];
+
+--- script
+
+core data, validations (manager)
+
+--- clip
+
+- (BOOL) validateForInsert:(NSError *__autoreleasing *)error {
+    
+    NSPredicate *nameGood = [NSPredicate predicateWithFormat:@"self.length > 0"];
+    NSPredicate *departmentName = [NSPredicate predicateWithFormat:@"self.length > 0"];
+    NSPredicate *all = [NSCompoundPredicate andPredicateWithSubpredicates:@[ nameGood, departmentName]];
+    return [all evaluateWithObject:self];
+}
+
+
+
+
+
+
+
+
+
+
+ 

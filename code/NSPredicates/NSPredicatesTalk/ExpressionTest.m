@@ -14,21 +14,38 @@
 
 @implementation ExpressionTest
 
-- (void)setUp
+- (void)testSimpleAddition
 {
-    [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
+    NSExpression *expression = [NSExpression expressionWithFormat:@"3 + 2"];
+    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
+    XCTAssert([result intValue] == 5, @"I'm five");
 }
 
-- (void)tearDown
+- (void) testComplicatedAddition
 {
-    // Put teardown code here; it will be run once, after the last test case.
-    [super tearDown];
+    NSExpression *expression = [NSExpression expressionWithFormat:@"(3 + 2) + (3 * 2)"];
+    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
+    XCTAssert([result intValue] == 11, @"I'm eleven");
 }
 
-- (void)testExample
+- (void) testComplexAddition
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    NSExpression *array = [NSExpression expressionForConstantValue:@[ @5, @6]];
+    NSExpression *toEvaluate = [NSExpression expressionForFunction:@"sum:" arguments:@[ array ]];
+    NSNumber *result = [toEvaluate expressionValueWithObject:nil context:nil];
+    XCTAssert([result intValue] == 11, @"I am 11");
+}
+
+- (void) testBuildPredicate
+{
+    NSExpression *lhs = [NSExpression expressionWithFormat:@"self"];
+    NSExpression *rhs = [NSExpression expressionWithFormat:@"%@",@"hello"];
+    NSPredicate *predicate = [NSComparisonPredicate predicateWithLeftExpression:lhs
+                                                                rightExpression:rhs
+                                                                       modifier:NSDirectPredicateModifier
+                                                                           type:NSEqualToPredicateOperatorType options:NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption];
+    XCTAssert([predicate evaluateWithObject:@"hello"], @"I'm a working predicate");
+
 }
 
 @end

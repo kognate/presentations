@@ -10,10 +10,19 @@
 
 @implementation StringPredicateTests
 
+- (void) testEquality
+{
+    NSString *target = @"hello";
+    NSPredicate *equal = [NSPredicate predicateWithFormat:@"self = %@",target];
+    XCTAssertFalse([equal evaluateWithObject:@"world"], @"Nope");
+    XCTAssertTrue([equal evaluateWithObject:@"hello"], @"Yep");
+}
+
 - (void) testContainsExample
 {
+    NSString *target = @"hello world";
     NSPredicate *greeting = [NSPredicate predicateWithFormat:@"self contains %@",@"hello"];
-    XCTAssertTrue([greeting evaluateWithObject:@"hello codemash"], @"");
+    XCTAssertTrue([greeting evaluateWithObject:target], @"I contain hello");
 }
 
 - (void) testBeginsWith
@@ -73,5 +82,14 @@
     NSPredicate *_emailValid = [NSPredicate predicateWithFormat:@"self matches '[a-z+]+@[a-z]+\\\\.com'"];
     XCTAssertTrue([_emailValid evaluateWithObject:email], @"This email works");
     XCTAssertFalse([_emailValid evaluateWithObject:bademail], @"This one doesn't");
+}
+
+- (void) testTemplatedBegins
+{
+    NSPredicate *template = [NSPredicate predicateWithFormat:@"self = $MYSTRING"];
+    
+    NSPredicate *instance = [template predicateWithSubstitutionVariables:@{@"MYSTRING": @"Atlanta"}];
+    XCTAssertTrue([instance evaluateWithObject:@"Atlanta"], @"Yep, atlanta");
+    XCTAssertFalse([instance evaluateWithObject:@"Boston"], @"Wait a minute...?");
 }
 @end

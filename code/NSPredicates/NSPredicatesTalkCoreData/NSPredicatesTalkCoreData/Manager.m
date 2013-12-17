@@ -16,4 +16,12 @@
 @dynamic name;
 @dynamic employees;
 
+- (BOOL) validateForInsert:(NSError *__autoreleasing *)error {
+    
+    NSPredicate *nameGood = [NSPredicate predicateWithFormat:@"self.length > 0"];
+    NSPredicate *departmentName = [NSPredicate predicateWithFormat:@"self.length > 0"];
+    NSPredicate *all = [NSCompoundPredicate andPredicateWithSubpredicates:@[ nameGood, departmentName]];
+    return [all evaluateWithObject:self];
+}
+
 @end

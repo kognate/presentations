@@ -131,9 +131,6 @@ void simple_fetch_in_model(NSError **error_p, NSManagedObjectContext *context)
                                                                      substitutionVariables:@{}];
     NSArray *managers = [context executeFetchRequest:fetchManagers error:&(*error_p)];
     NSLog(@"First Manager: %@",[[managers lastObject] valueForKey:@"name"]);
-    
-
-    
 }
 
 int main(int argc, const char * argv[])
