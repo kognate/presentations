@@ -60,6 +60,7 @@ BOOL is_palindrome(char *tocheck) {
     unsigned long start_length = strlen(start);
     unsigned long k, r;
     char holder;
+    
     // hello k & r
     for (k = 0, r = start_length - 1; k < r; k++, r--)
     {
