@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4065C5C9187FA5DE00E5E431 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4065C5C8187FA5DE00E5E431 /* Cocoa.framework */; };
+		4065C5D3187FA5DE00E5E431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4065C5D1187FA5DE00E5E431 /* InfoPlist.strings */; };
+		4065C5D5187FA5DE00E5E431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4065C5D4187FA5DE00E5E431 /* main.m */; };
+		4065C5D9187FA5DE00E5E431 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4065C5D7187FA5DE00E5E431 /* Credits.rtf */; };
+		4065C5DC187FA5DE00E5E431 /* RCWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4065C5DB187FA5DE00E5E431 /* RCWAppDelegate.m */; };
+		4065C5DF187FA5DE00E5E431 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4065C5DD187FA5DE00E5E431 /* MainMenu.xib */; };
+		4065C5E2187FA5DE00E5E431 /* CodeMash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4065C5E0187FA5DE00E5E431 /* CodeMash.xcdatamodeld */; };
+		4065C5E4187FA5DE00E5E431 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4065C5E3187FA5DE00E5E431 /* Images.xcassets */; };
+		4065C5EB187FA5DE00E5E431 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4065C5EA187FA5DE00E5E431 /* XCTest.framework */; };
+		4065C5EC187FA5DE00E5E431 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4065C5C8187FA5DE00E5E431 /* Cocoa.framework */; };
+		4065C5F4187FA5DE00E5E431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4065C5F2187FA5DE00E5E431 /* InfoPlist.strings */; };
+		4065C5F6187FA5DE00E5E431 /* CodeMashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4065C5F5187FA5DE00E5E431 /* CodeMashTests.m */; };
+		4065C601187FA84100E5E431 /* CodeMash.m in Sources */ = {isa = PBXBuildFile; fileRef = 4065C600187FA84100E5E431 /* CodeMash.m */; };
+		4065C603187FA88400E5E431 /* RCWCodeMashMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4065C602187FA88400E5E431 /* RCWCodeMashMathTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4065C5ED187FA5DE00E5E431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4065C5BD187FA5DE00E5E431 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4065C5C4187FA5DE00E5E431;
+			remoteInfo = CodeMash;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4065C5C5187FA5DE00E5E431 /* CodeMash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeMash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4065C5C8187FA5DE00E5E431 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4065C5CB187FA5DE00E5E431 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4065C5CC187FA5DE00E5E431 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4065C5CD187FA5DE00E5E431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4065C5D0187FA5DE00E5E431 /* CodeMash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CodeMash-Info.plist"; sourceTree = "<group>"; };
+		4065C5D2187FA5DE00E5E431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4065C5D4187FA5DE00E5E431 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4065C5D6187FA5DE00E5E431 /* CodeMash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CodeMash-Prefix.pch"; sourceTree = "<group>"; };
+		4065C5D8187FA5DE00E5E431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		4065C5DA187FA5DE00E5E431 /* RCWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCWAppDelegate.h; sourceTree = "<group>"; };
+		4065C5DB187FA5DE00E5E431 /* RCWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCWAppDelegate.m; sourceTree = "<group>"; };
+		4065C5DE187FA5DE00E5E431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4065C5E1187FA5DE00E5E431 /* CodeMash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CodeMash.xcdatamodel; sourceTree = "<group>"; };
+		4065C5E3187FA5DE00E5E431 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4065C5E9187FA5DE00E5E431 /* CodeMashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeMashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4065C5EA187FA5DE00E5E431 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		4065C5F1187FA5DE00E5E431 /* CodeMashTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CodeMashTests-Info.plist"; sourceTree = "<group>"; };
+		4065C5F3187FA5DE00E5E431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4065C5F5187FA5DE00E5E431 /* CodeMashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeMashTests.m; sourceTree = "<group>"; };
+		4065C5FF187FA84100E5E431 /* CodeMash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeMash.h; sourceTree = "<group>"; };
+		4065C600187FA84100E5E431 /* CodeMash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeMash.m; sourceTree = "<group>"; };
+		4065C602187FA88400E5E431 /* RCWCodeMashMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCWCodeMashMathTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4065C5C2187FA5DE00E5E431 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C5C9187FA5DE00E5E431 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4065C5E6187FA5DE00E5E431 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C5EC187FA5DE00E5E431 /* Cocoa.framework in Frameworks */,
+				4065C5EB187FA5DE00E5E431 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4065C5BC187FA5DE00E5E431 = {
+			isa = PBXGroup;
+			children = (
+				4065C5CE187FA5DE00E5E431 /* CodeMash */,
+				4065C5EF187FA5DE00E5E431 /* CodeMashTests */,
+				4065C5C7187FA5DE00E5E431 /* Frameworks */,
+				4065C5C6187FA5DE00E5E431 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4065C5C6187FA5DE00E5E431 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5C5187FA5DE00E5E431 /* CodeMash.app */,
+				4065C5E9187FA5DE00E5E431 /* CodeMashTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4065C5C7187FA5DE00E5E431 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5C8187FA5DE00E5E431 /* Cocoa.framework */,
+				4065C5EA187FA5DE00E5E431 /* XCTest.framework */,
+				4065C5CA187FA5DE00E5E431 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4065C5CA187FA5DE00E5E431 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5CB187FA5DE00E5E431 /* AppKit.framework */,
+				4065C5CC187FA5DE00E5E431 /* CoreData.framework */,
+				4065C5CD187FA5DE00E5E431 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		4065C5CE187FA5DE00E5E431 /* CodeMash */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5DA187FA5DE00E5E431 /* RCWAppDelegate.h */,
+				4065C5DB187FA5DE00E5E431 /* RCWAppDelegate.m */,
+				4065C5DD187FA5DE00E5E431 /* MainMenu.xib */,
+				4065C5E3187FA5DE00E5E431 /* Images.xcassets */,
+				4065C5E0187FA5DE00E5E431 /* CodeMash.xcdatamodeld */,
+				4065C5CF187FA5DE00E5E431 /* Supporting Files */,
+			);
+			path = CodeMash;
+			sourceTree = "<group>";
+		};
+		4065C5CF187FA5DE00E5E431 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5D0187FA5DE00E5E431 /* CodeMash-Info.plist */,
+				4065C5D1187FA5DE00E5E431 /* InfoPlist.strings */,
+				4065C5D4187FA5DE00E5E431 /* main.m */,
+				4065C5D6187FA5DE00E5E431 /* CodeMash-Prefix.pch */,
+				4065C5D7187FA5DE00E5E431 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4065C5EF187FA5DE00E5E431 /* CodeMashTests */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5F5187FA5DE00E5E431 /* CodeMashTests.m */,
+				4065C5FF187FA84100E5E431 /* CodeMash.h */,
+				4065C600187FA84100E5E431 /* CodeMash.m */,
+				4065C5F0187FA5DE00E5E431 /* Supporting Files */,
+				4065C602187FA88400E5E431 /* RCWCodeMashMathTests.m */,
+			);
+			path = CodeMashTests;
+			sourceTree = "<group>";
+		};
+		4065C5F0187FA5DE00E5E431 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4065C5F1187FA5DE00E5E431 /* CodeMashTests-Info.plist */,
+				4065C5F2187FA5DE00E5E431 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4065C5C4187FA5DE00E5E431 /* CodeMash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4065C5F9187FA5DE00E5E431 /* Build configuration list for PBXNativeTarget "CodeMash" */;
+			buildPhases = (
+				4065C5C1187FA5DE00E5E431 /* Sources */,
+				4065C5C2187FA5DE00E5E431 /* Frameworks */,
+				4065C5C3187FA5DE00E5E431 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CodeMash;
+			productName = CodeMash;
+			productReference = 4065C5C5187FA5DE00E5E431 /* CodeMash.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4065C5E8187FA5DE00E5E431 /* CodeMashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4065C5FC187FA5DE00E5E431 /* Build configuration list for PBXNativeTarget "CodeMashTests" */;
+			buildPhases = (
+				4065C5E5187FA5DE00E5E431 /* Sources */,
+				4065C5E6187FA5DE00E5E431 /* Frameworks */,
+				4065C5E7187FA5DE00E5E431 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4065C5EE187FA5DE00E5E431 /* PBXTargetDependency */,
+			);
+			name = CodeMashTests;
+			productName = CodeMashTests;
+			productReference = 4065C5E9187FA5DE00E5E431 /* CodeMashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4065C5BD187FA5DE00E5E431 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RCW;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Josh Smith";
+				TargetAttributes = {
+					4065C5E8187FA5DE00E5E431 = {
+						TestTargetID = 4065C5C4187FA5DE00E5E431;
+					};
+				};
+			};
+			buildConfigurationList = 4065C5C0187FA5DE00E5E431 /* Build configuration list for PBXProject "CodeMash" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4065C5BC187FA5DE00E5E431;
+			productRefGroup = 4065C5C6187FA5DE00E5E431 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4065C5C4187FA5DE00E5E431 /* CodeMash */,
+				4065C5E8187FA5DE00E5E431 /* CodeMashTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4065C5C3187FA5DE00E5E431 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C5D3187FA5DE00E5E431 /* InfoPlist.strings in Resources */,
+				4065C5E4187FA5DE00E5E431 /* Images.xcassets in Resources */,
+				4065C5D9187FA5DE00E5E431 /* Credits.rtf in Resources */,
+				4065C5DF187FA5DE00E5E431 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4065C5E7187FA5DE00E5E431 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C5F4187FA5DE00E5E431 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4065C5C1187FA5DE00E5E431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C5D5187FA5DE00E5E431 /* main.m in Sources */,
+				4065C5DC187FA5DE00E5E431 /* RCWAppDelegate.m in Sources */,
+				4065C5E2187FA5DE00E5E431 /* CodeMash.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4065C5E5187FA5DE00E5E431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4065C603187FA88400E5E431 /* RCWCodeMashMathTests.m in Sources */,
+				4065C5F6187FA5DE00E5E431 /* CodeMashTests.m in Sources */,
+				4065C601187FA84100E5E431 /* CodeMash.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4065C5EE187FA5DE00E5E431 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4065C5C4187FA5DE00E5E431 /* CodeMash */;
+			targetProxy = 4065C5ED187FA5DE00E5E431 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4065C5D1187FA5DE00E5E431 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4065C5D2187FA5DE00E5E431 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4065C5D7187FA5DE00E5E431 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4065C5D8187FA5DE00E5E431 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		4065C5DD187FA5DE00E5E431 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4065C5DE187FA5DE00E5E431 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		4065C5F2187FA5DE00E5E431 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4065C5F3187FA5DE00E5E431 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4065C5F7187FA5DE00E5E431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4065C5F8187FA5DE00E5E431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4065C5FA187FA5DE00E5E431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodeMash/CodeMash-Prefix.pch";
+				INFOPLIST_FILE = "CodeMash/CodeMash-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4065C5FB187FA5DE00E5E431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodeMash/CodeMash-Prefix.pch";
+				INFOPLIST_FILE = "CodeMash/CodeMash-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4065C5FD187FA5DE00E5E431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CodeMash.app/Contents/MacOS/CodeMash";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodeMash/CodeMash-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CodeMashTests/CodeMashTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		4065C5FE187FA5DE00E5E431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CodeMash.app/Contents/MacOS/CodeMash";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodeMash/CodeMash-Prefix.pch";
+				INFOPLIST_FILE = "CodeMashTests/CodeMashTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4065C5C0187FA5DE00E5E431 /* Build configuration list for PBXProject "CodeMash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4065C5F7187FA5DE00E5E431 /* Debug */,
+				4065C5F8187FA5DE00E5E431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4065C5F9187FA5DE00E5E431 /* Build configuration list for PBXNativeTarget "CodeMash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4065C5FA187FA5DE00E5E431 /* Debug */,
+				4065C5FB187FA5DE00E5E431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4065C5FC187FA5DE00E5E431 /* Build configuration list for PBXNativeTarget "CodeMashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4065C5FD187FA5DE00E5E431 /* Debug */,
+				4065C5FE187FA5DE00E5E431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4065C5E0187FA5DE00E5E431 /* CodeMash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4065C5E1187FA5DE00E5E431 /* CodeMash.xcdatamodel */,
+			);
+			currentVersion = 4065C5E1187FA5DE00E5E431 /* CodeMash.xcdatamodel */;
+			path = CodeMash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4065C5BD187FA5DE00E5E431 /* Project object */;
+}

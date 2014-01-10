@@ -1,0 +1,477 @@
+--- script
+
+I want to add nsnumbers
+
+--- clip
+
+NSNumber *result = @20 + @10;
+
+--- script
+
+but that doesn't work.  
+
+--- clip
+
+- (void) testUnbox
+{
+    int res = [@10 intValue] + [@10 intValue];
+    XCTAssert(res = 20, @"I am 20!");
+}
+
+--- script
+
+lets build a 4 function calculator that only handles NSNumbers.
+
+--- clip
+
+- (void) testAdd {
+    NSExpression *add = [NSExpression expressionWithFormat:@"%@ + %@",@20, @10];
+    XCTAssertEqualObjects(@30, [add expressionValueWithObject:Nil context:nil],@"I'm 30");
+}
+
+--- clip
+
+- (void) testSubtract {
+
+    NSExpression *sub = [NSExpression expressionWithFormat:@"%@ - %@",@20, @10];
+    XCTAssertEqualObjects([NSNumber numberWithInt:10], [sub expressionValueWithObject:Nil context:nil],@"I'm 10");
+    
+}
+
+--- clip
+
+- (void) testMultiply {
+
+    NSExpression *mult = [NSExpression expressionWithFormat:@"%@ * %@",@20, @10];
+    XCTAssertEqualObjects(@200, [mult expressionValueWithObject:Nil context:nil],@"I'm 200");
+    
+}
+
+--- clip
+
+- (void) testDivide {
+
+    NSExpression *divide = [NSExpression expressionWithFormat:@"%@ / %@",@20, @10];
+    XCTAssertEqualObjects(@2, [divide expressionValueWithObject:nil context:nil],@"I'm 2");
+}
+
+--- clip
+
+@implementation NSNumber (CodeMash)
+
+- (NSNumber *) multiplyBy:(NSNumber *) numby {
+    NSExpression *mult = [NSExpression expressionForConstantValue:self];
+    NSExpression *multby = [NSExpression expressionForConstantValue:numby];
+    NSExpression *domath = [NSExpression expressionForFunction:@"multiply:by:" arguments:@[mult, multby] ];
+    return [domath expressionValueWithObject:nil context:nil];
+}
+
+@end
+
+--- clip
+
+- (void) testCategoryMultiply {
+    NSNumber *n = @20;
+    XCTAssertEqualObjects([n multiplyBy:@10], @200, @"I am 200");
+}
+
+
+--- clip
+
+- (NSNumber *) modulo:(NSNumber *) mod {
+    NSExpression *modu = [NSExpression expressionForConstantValue:self];
+    NSExpression *multby = [NSExpression expressionForConstantValue:mod];
+    NSExpression *domath = [NSExpression expressionForFunction:@"modulus:by:" arguments:@[modu, multby] ];
+    return [domath expressionValueWithObject:nil context:nil];
+}
+
+--- clip
+
+- (void) testModulo {
+    NSNumber *n = @21;
+    NSNumber *result = [n modulo:@3];
+    XCTAssertEqualObjects(@0, result, @"I'm zero");
+}
+
+--- clip
+
+- (NSNumber *) abs {
+    NSExpression *current = [NSExpression expressionForConstantValue:self];
+    NSExpression *domath = [NSExpression expressionForFunction:@"abs:" arguments:@[ current ]];
+    return [domath expressionValueWithObject:nil context:nil];
+}
+
+--- clip
+
+- (void) testABs {
+    NSNumber *n = [NSNumber numberWithInt:-100];
+    NSNumber *result = [n abs];
+    XCTAssertEqualObjects(@100, result, @"I'm 100");
+}
+
+--- clip
+
+- (NSNumber *) ceil {
+    NSExpression *current = [NSExpression expressionForConstantValue:self];
+    NSExpression *domath = [NSExpression expressionForFunction:@"ceiling:" arguments:@[ current ]];
+    return [domath expressionValueWithObject:nil context:nil];
+}
+
+- (NSNumber *) floor {
+    NSExpression *current = [NSExpression expressionForConstantValue:self];
+    NSExpression *domath = [NSExpression expressionForFunction:@"floor:" arguments:@[ current ]];
+    return [domath expressionValueWithObject:nil context:nil];
+}
+
+-- clip
+
+- (void) testCeil {
+    NSNumber *n = [NSNumber numberWithFloat:3.14159];
+    NSNumber *result = [n ceil];
+    XCTAssertEqualObjects(result, @4, @"Not very Pi");
+}
+
+- (void) testFloor {
+    NSNumber *n = [NSNumber numberWithFloat:3.14159];
+    NSNumber *result = [n floor];
+    XCTAssertEqualObjects(result, @3, @"Not very Pi, either");
+}
+
+--- clip
+
+- (void) testMinusPredicate {
+
+    NSSet *firstSet = [NSSet setWithArray:@[ @1, @5, @7]];
+    NSSet *secondSet = [NSSet setWithArray:@[ @3, @7, @11]];
+    NSPredicate *_pred = [NSPredicate predicateWithFormat:@"NOT (self in %@)",secondSet];
+    NSSet *filtered = [firstSet filteredSetUsingPredicate:_pred];
+    NSSet *target = [NSSet setWithArray:@[@1, @5 ]];
+    XCTAssertEqualObjects(filtered, target, @"Using a predicate");
+}
+
+--- clip
+
+- (void) testMinus
+{
+    NSSet *firstSet = [NSSet setWithArray:@[ @1, @5, @7]];
+    NSSet *secondSet = [NSSet setWithArray:@[ @3, @7, @11]];
+
+    NSExpression *a = [NSExpression expressionForConstantValue:firstSet];
+    NSExpression *b =[NSExpression expressionForConstantValue: secondSet];
+    NSExpression *e = [NSExpression expressionForMinusSet:a with:b];
+    
+    NSSet *result = [e expressionValueWithObject:nil context:nil];
+    NSSet *target = [NSSet setWithArray:@[@1, @5 ]];
+    
+    XCTAssertEqualObjects(result, target, @"I'm the minus");
+    
+}
+
+--- clip 
+
+- (void) testPredicateConstruction
+{
+    NSExpression *leftHand = [NSExpression expressionForConstantValue:@"first"];
+    NSExpression *rightHand = [NSExpression expressionForVariable:@"TARGETNAME"];
+    NSPredicate *categoryNamePredicateTemplate = [[NSComparisonPredicate alloc] initWithLeftExpression:leftHand
+                                                                                       rightExpression:rightHand
+                                                                                              modifier:NSDirectPredicateModifier
+                                                                                                  type:NSLikePredicateOperatorType
+                                                                                               options:0];
+    
+    NSPredicate *run = [categoryNamePredicateTemplate predicateWithSubstitutionVariables:@{@"TARGETNAME" : @"?ir*"}];
+    XCTAssert([run evaluateWithObject:nil], @"should work");
+}
+
+--- clip 
+
+- (void) testPredicateAll
+{
+    NSArray *expressions = @[
+                             [NSExpression expressionForConstantValue:@2],
+                             [NSExpression expressionForConstantValue:@4],
+                             [NSExpression expressionForConstantValue:@6],
+                             [NSExpression expressionForConstantValue:@8],
+                             ];
+    NSExpression *leftHand = [NSExpression expressionForAggregate:expressions];
+    NSExpression *rightHand = [NSExpression expressionForConstantValue:@10];
+    NSPredicate *anyPred = [[NSComparisonPredicate alloc] initWithLeftExpression:leftHand
+                                                                 rightExpression:rightHand
+                                                                        modifier:NSAllPredicateModifier
+                                                                            type:NSLessThanOrEqualToPredicateOperatorType
+                                                                         options:0];
+    
+    XCTAssert([anyPred evaluateWithObject:nil], @"should work");
+}
+
+--- script
+
+What?
+
+--- clip
+
+- (void) testExpressionObjects
+{
+    NSExpression *e = [NSExpression expressionWithFormat:@"self + $SOMEVALUE"];
+    NSMutableDictionary *context = [NSMutableDictionary dictionaryWithObject:@10 forKey:@"SOMEVALUE"];
+    NSNumber *result = [e expressionValueWithObject:@20 context:context];
+    XCTAssertEqualObjects(@30, result, @"I'm 30");
+}
+
+--- script
+
+subqueries
+
+--- clip
+
+@interface SCObject : NSObject
+
+@property (strong) NSString *firstName;
+@property (strong) NSString *familyName;
+@property (strong) NSSet *children;
++ (id) random:(int) depth;
+- (void) randomName;
+@end
+
+--- clip
+
+@implementation SCObject
+
++ (id) random:(int) depth {
+    SCObject *obj = [[SCObject alloc] init];
+    [obj randomName];
+    depth--;
+    
+    if (depth > 0) {
+        int nchild = arc4random_uniform(4);
+        NSMutableSet *children = [[NSMutableSet alloc] initWithCapacity:nchild];
+
+        for (int i = nchild; i > 0; i--) {
+            SCObject *childObj = [SCObject random:depth];
+            [children addObject:childObj];
+        }
+        obj.children = children;
+    }
+    return obj;
+}
+
+- (void) randomName {
+    NSArray *names = @[@"issac", @"vernie", @"wenona", @"delsie", @"lawana", @"nona", @"tamiko", @"annabell", @"justine", @"elisabeth", @"ermelinda", @"marna", @"mabel", @"wendie", @"dianne", @"berna", @"hilary", @"shae", @"jenelle", @"selma"];
+    NSString *name = names[arc4random_uniform([names count])];
+    self.firstName = name;
+}
+@end
+
+--- clip 
+
+- (void) testGrandparent
+{
+    
+    NSPredicate *grandparents = [NSPredicate predicateWithFormat:@"SUBQUERY(children, $ch, $ch.children.@count > 0).@count > 0"];
+    SCObject *gp = [SCObject random:4];
+    XCTAssert([grandparents evaluateWithObject:gp],@"I'm a grandparent");
+    
+    NSSet *gps = [gp.children filteredSetUsingPredicate:grandparents];
+    XCTAssert([gps count] > 0,@"children are grandparents");
+}
+
+--- clip
+
+#import <Foundation/Foundation.h>
+
+@interface CodeMash : NSObject
+
+/*! Allows access to the data array that gets passed in via init. */
+@property (strong,nonatomic, readonly) NSArray *dataArray;
+
+/*! The sortedDataArray contains the same information as the dataArray
+ but has been sorted. */ 
+@property (strong,nonatomic, readonly) NSArray *sortedDataArray;
+
+- (id) initWithArray:(NSArray *) arrayOfNumbers;
+- (id) initWithArray:(NSArray *) arrayOfObjects usingKey:(NSString *) keystring;
+
+/*! returns the sum of the numbers in the array.  If the array does not contain
+ numbers, this will raise
+ */
+- (NSNumber *) sum;
+- (NSNumber *) min;
+- (NSNumber *) max;
+- (NSNumber *) mean;
+- (NSNumber *) median;
+- (NSNumber *) mmode;
+
+- (NSNumber *) firstQuartile;
+- (NSNumber *) thirdQuartile;
+
+- (NSDictionary *) descriptiveStats;
+@end
+
+--- clip
+
+#import "CodeMash.h"
+
+@interface CodeMash ()
+@property (strong,nonatomic) NSArray *sortedDataArray;
+@property (strong,nonatomic) NSArray *dataArray;
+@property (strong, nonatomic) NSCache *cache;
+@end
+
+@implementation CodeMash
+
+- (id) initWithArray:(NSArray *) arrayOfNumbers {
+    BOOL clean = YES;
+    
+    if (self = [super init]) {
+        self.dataArray = arrayOfNumbers;
+        @try {
+            self.sortedDataArray = [self.dataArray sortedArrayUsingComparator:^NSComparisonResult(NSNumber *a, NSNumber *b)
+                                    {
+                                        return [a compare:b];
+                                    }];
+        }
+        @catch (NSException *exception) {
+            clean = NO;
+        }
+        self.cache = [[NSCache alloc] init];
+    }
+    NSAssert(clean,@"If I'm not clean, the inputs are bad");
+    return clean ? self : nil;
+}
+
+- (id) initWithArray:(NSArray *)arrayOfObjects usingKey:(NSString *)keystring {
+    NSArray *_res = [arrayOfObjects valueForKeyPath:keystring];
+    return [self initWithArray:_res];
+}
+
+- (NSNumber *) methodWithName:(NSString *) fname {
+    NSNumber *res = [self.cache objectForKey:fname];
+    
+    if (res == nil) {
+        NSExpression *args = [NSExpression expressionForConstantValue:self.dataArray];
+        NSExpression *n = [NSExpression expressionForFunction:fname arguments:@[ args ]];
+
+        if ([fname isEqualToString:@"mode:"]) {
+            res = [[n expressionValueWithObject:nil context:nil] lastObject];
+        } else {
+            res = [n expressionValueWithObject:nil context:nil];
+        }
+        [self.cache setObject:res forKey:fname];
+    }
+	return res;
+}
+
+- (NSNumber *) sum {
+    return [self methodWithName:@"sum:"];
+}
+
+- (NSNumber *) min { return [self methodWithName:@"min:"]; }
+- (NSNumber *) max { return [self methodWithName:@"max:"]; }
+- (NSNumber *) mean { return [self methodWithName:@"average:"]; }
+- (NSNumber *) median { return [self methodWithName:@"median:"]; }
+- (NSNumber *) mmode { return [self methodWithName:@"mode:"]; }
+- (NSNumber *) stddev { return [self methodWithName:@"stddev:"]; }
+
+- (NSNumber *) firstQuartile {
+    NSPredicate *_fq = [NSPredicate predicateWithFormat:@"self between {%@, %@}",[self min],[self median]];
+    NSArray *ar = [self.sortedDataArray filteredArrayUsingPredicate:_fq];
+    
+    NSExpression *args = [NSExpression expressionForConstantValue:ar];
+	NSExpression *n = [NSExpression expressionForFunction:@"median:" arguments:@[ args ]];
+    return [n expressionValueWithObject:nil context:nil];
+}
+
+- (NSNumber *) thirdQuartile {
+    NSPredicate *_fq = [NSPredicate predicateWithFormat:@"self between {%@, %@}",[self median],[self max]];
+    NSArray *ar = [self.sortedDataArray filteredArrayUsingPredicate:_fq];
+    
+    NSExpression *args = [NSExpression expressionForConstantValue:ar];
+	NSExpression *n = [NSExpression expressionForFunction:@"median:" arguments:@[ args ]];
+    return [n expressionValueWithObject:nil context:nil];
+}
+
+- (NSDictionary *) descriptiveStats {
+    return @{ @"min" : [self min],
+              @"max" : [self max],
+              @"mean" : [self mean],
+              @"median" : [self median],
+              @"mode" : [self mmode],
+              @"stddev" : [self stddev],
+              @"1stQuartile": [self firstQuartile],
+              @"3rdQuartile": [self thirdQuartile],
+              };
+}
+
+@end
+
+--- clip
+
+- (void)setUp
+{
+    [super setUp];
+    
+    self.b_first = [[CodeMash alloc] initWithArray:@[@1, @3, @4]];
+    self.b_second = [[CodeMash alloc] initWithArray:@[@7, @6, @3]];
+}
+
+- (void)testSum
+{
+    XCTAssertTrue([[self.b_first sum] isEqualToNumber:@8], @"sum is 8");
+    XCTAssertTrue([[self.b_second sum] isEqualToNumber:@16], @"sum is 16");
+}
+
+- (void) testMin {
+    XCTAssertTrue([[self.b_first min] isEqualToNumber:@1], @"min is 1");
+    XCTAssertTrue([[self.b_second min] isEqualToNumber:@3], @"min is 3");
+}
+
+- (void) testMax {
+    XCTAssertTrue([[self.b_first max] isEqualToNumber:@4], @"max is 4");
+    XCTAssertTrue([[self.b_second max] isEqualToNumber:@7], @"max is 7");
+}
+
+- (void) testAverage {
+    XCTAssertTrue([[self.b_first mean] isEqualToNumber:@(8.0/3.0)], @"mean is is 8/3");
+    XCTAssertTrue([[self.b_second mean] isEqualToNumber:@(16.0/3.0)], @"max is 16/3");
+}
+
+- (void) testMedian {
+    XCTAssertTrue([[self.b_first median] isEqualToNumber:@3], @"median is 3");
+    XCTAssertTrue([[self.b_second median] isEqualToNumber:@6], @"median is 6");
+}
+
+- (void) testMode {
+    CodeMash *b = [[CodeMash alloc] initWithArray:@[ @4, @4, @3, @9, @10, @4]];
+    XCTAssertTrue([[self.b_first mmode] isEqualToNumber:@1], @"mode is 1");
+    XCTAssertTrue([[self.b_second mmode] isEqualToNumber:@3], @"mode is 3");
+    XCTAssertTrue([[b mmode] isEqualToNumber:@4], @"mode is 4");
+}
+
+// > summary(c(4,4,3,9,10,4,8,7,6,11,10,12,12));
+// Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+// 3.000   4.000   8.000   7.692  10.000  12.000
+
+- (void) testQuartiles {
+    CodeMash *b = [[CodeMash alloc] initWithArray:@[ @4, @4, @3, @9, @10, @4, @8, @7, @6, @11, @10, @12, @12]];
+    NSDictionary *res = [b descriptiveStats];
+    XCTAssertTrue([res[@"mode"] isEqualToNumber:@4], @"mode is still 4");
+    XCTAssertTrue([res[@"min"] isEqualToNumber:@3], @"min is 3");
+    XCTAssertTrue([res[@"1stQuartile"] isEqualToNumber:@4], @"q_1 is 4");
+    XCTAssertTrue([res[@"3rdQuartile"] isEqualToNumber:@10], @"q_3 is 10");
+}
+
+- (void) testInitKeyPath  {
+    NSArray *d = @[ @{ @"Name" : @"first", @"price" : @23.00 },
+                         @{ @"Name" : @"second", @"price" : @32.00 } ];
+    CodeMash *b = [[CodeMash alloc] initWithArray:d usingKey:@"price"];
+    XCTAssertTrue([[b min] isEqualToNumber:@23.00], @"min is correct");
+}
+
+- (void) throwEncapsulation {
+    CodeMash *b = [[CodeMash alloc] initWithArray:@[ @1, @2, @"hello", @4]];
+    XCTAssertNil(b, @"I will be nil, unless I assert");
+}
+
+- (void) testWillThrow {
+    XCTAssertThrows([self throwEncapsulation], @"I should be throwing");
+}
