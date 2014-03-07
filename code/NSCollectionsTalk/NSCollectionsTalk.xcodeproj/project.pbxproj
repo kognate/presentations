@@ -24,6 +24,8 @@
 		407B970617F52761009C74A0 /* PointerArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 407B970517F52761009C74A0 /* PointerArray.m */; };
 		407B970A17F52DE3009C74A0 /* MapTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 407B970917F52DE3009C74A0 /* MapTableTests.m */; };
 		408D002C18369D5E005E7516 /* CFBitVectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 408D002B18369D5E005E7516 /* CFBitVectorTests.m */; };
+		4098723E18CA8A6D009C71E2 /* PrioQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098723D18CA8A6D009C71E2 /* PrioQueueTests.m */; };
+		4098724718CA8CC2009C71E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4098724618CA8CC2009C71E2 /* CoreData.framework */; };
 		40A44B971860F8F1009972C8 /* CFBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A44B961860F8F1009972C8 /* CFBagTests.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,9 @@
 		407B970517F52761009C74A0 /* PointerArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointerArray.m; sourceTree = "<group>"; };
 		407B970917F52DE3009C74A0 /* MapTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTableTests.m; sourceTree = "<group>"; };
 		408D002B18369D5E005E7516 /* CFBitVectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFBitVectorTests.m; sourceTree = "<group>"; };
+		4098723C18CA8A6D009C71E2 /* PrioQueueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrioQueueTests.h; sourceTree = "<group>"; };
+		4098723D18CA8A6D009C71E2 /* PrioQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrioQueueTests.m; sourceTree = "<group>"; };
+		4098724618CA8CC2009C71E2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		40A44B961860F8F1009972C8 /* CFBagTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFBagTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4098724718CA8CC2009C71E2 /* CoreData.framework in Frameworks */,
 				407B96C417F501CD009C74A0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +124,7 @@
 		407B96C217F501CD009C74A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4098724618CA8CC2009C71E2 /* CoreData.framework */,
 				407B96C317F501CD009C74A0 /* Foundation.framework */,
 				407B96D617F501FD009C74A0 /* XCTest.framework */,
 			);
@@ -158,6 +165,8 @@
 				407B970917F52DE3009C74A0 /* MapTableTests.m */,
 				408D002B18369D5E005E7516 /* CFBitVectorTests.m */,
 				40A44B961860F8F1009972C8 /* CFBagTests.m */,
+				4098723C18CA8A6D009C71E2 /* PrioQueueTests.h */,
+				4098723D18CA8A6D009C71E2 /* PrioQueueTests.m */,
 			);
 			path = "NSCollectionsTalk Tests";
 			sourceTree = "<group>";
@@ -282,6 +291,7 @@
 				40A44B971860F8F1009972C8 /* CFBagTests.m in Sources */,
 				407B970A17F52DE3009C74A0 /* MapTableTests.m in Sources */,
 				408D002C18369D5E005E7516 /* CFBitVectorTests.m in Sources */,
+				4098723E18CA8A6D009C71E2 /* PrioQueueTests.m in Sources */,
 				407B96F517F50A2E009C74A0 /* CArray.m in Sources */,
 				407B970217F5178D009C74A0 /* OhHaiIndexSet.m in Sources */,
 				407B970417F51FAC009C74A0 /* CountedSet.m in Sources */,
