@@ -18,7 +18,7 @@
 {
     CFTreeContext ctx;
     ctx.version = 0;
-    ctx.info = (void *)"Hello Tree!";
+    ctx.info = (void *)@"Hello Tree!";
     
     CFTreeRef tree = CFTreeCreate(CFAllocatorGetDefault(), &ctx);
     
@@ -27,15 +27,16 @@
     fc_ctx.info = (void *)"First Child";
     CFTreeRef first_child = CFTreeCreate(CFAllocatorGetDefault(), &fc_ctx);
     
+    CFTreeContext sc_ctx;
+    sc_ctx.version = 0;
+    sc_ctx.info = (void *)"Second Child";
+    CFTreeRef second_child = CFTreeCreate(CFAllocatorGetDefault(), &sc_ctx);
+    
     CFTreeAppendChild(tree, first_child);
     XCTAssertTrue(CFTreeGetChildCount(tree) == 1, @"should have one child");
     
-    CFTreeContext sc_ctx;
-    sc_ctx.version = 0;
-    sc_ctx.info = (void *)"Second Child, Sibling";
-    
-    CFTreeRef second_child = CFTreeCreate(CFAllocatorGetDefault(), &sc_ctx);
-    CFTreeAppendChild(tree, second_child);
+    CFTreeInsertSibling(first_child, second_child);
+    XCTAssertTrue(CFTreeGetChildCount(tree) == 2, @"should have two children");
 
     CFTreeRef found_child;
     CFTreeContext find_ctx;
@@ -51,7 +52,7 @@
     second_found_child = CFTreeGetNextSibling(found_child);
     CFTreeGetContext(second_found_child, &sfc_ctx);
     
-    XCTAssert(strcmp("Second Child, Sibling", sfc_ctx.info) == 0, @"Correct String");
+    XCTAssert(strcmp("Second Child", sfc_ctx.info) == 0, @"Correct String");
     
     CFTreeRef not_found;
     not_found = CFTreeGetNextSibling(second_found_child);

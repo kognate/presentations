@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3389" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Accounting" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="when" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <entity name="SecretMessage" representedClassName="SecretMessage" syncable="YES">
         <attribute name="message" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="messageEncrypted" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SecretMessage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SecretMessage" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Accounting" positionX="0" positionY="18" width="128" height="75"/>
     </elements>
 </model>

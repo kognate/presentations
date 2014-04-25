@@ -8,6 +8,7 @@
 
 #import "SecretMessage.h"
 #import "KeychainItemWrapper.h"
+
 #import <CommonCrypto/CommonCrypto.h>
 
 NSString* kSecretEncryptionKey = @"SECRETKEYFORENCRYPTINGTHEPASSWRD";
@@ -30,7 +31,7 @@ NSData* encryptString(NSString* plaintext, NSData* key, NSData* iv)
                                               kCCAlgorithmAES128,
                                               kCCOptionPKCS7Padding,
                                               [key bytes],
-                                                ,
+                                              [key length],
                                               [iv bytes],
                                               [plaintextData bytes],
                                               [plaintextData length],

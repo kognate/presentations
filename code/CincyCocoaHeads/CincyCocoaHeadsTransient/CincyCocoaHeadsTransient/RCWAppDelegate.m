@@ -11,6 +11,41 @@
 #import "KeychainItemWrapper.h"
 #import "RCWMainViewController.h"
 
+@interface AccountingDocument : UIManagedDocument
+- (void) logMessage:(NSString *) message;
+- (void) setup;
+@end
+
+@implementation AccountingDocument
+
+- (void) logMessage:(NSString *)message {
+    [self.managedObjectContext performBlock:^{
+        NSManagedObject *msg = [NSEntityDescription insertNewObjectForEntityForName:@"Accounting"inManagedObjectContext:self.managedObjectContext];
+        [msg setValue:message forKey:@"message"];
+        [msg setValue:[NSDate date] forKey:@"when"];
+    }];
+}
+
+- (void) shouldLog:(NSNotification *) note
+{
+    NSSet *updatedObjects = [[note userInfo] objectForKey:NSUpdatedObjectsKey];
+    NSSet *deletedObjects = [[note userInfo] objectForKey:NSDeletedObjectsKey];
+    NSSet *insertedObjects = [[note userInfo] objectForKey:NSInsertedObjectsKey];
+    
+    NSString *lmessage = [NSString stringWithFormat:@"hey, something happend %@ %@ %@",updatedObjects,
+                          deletedObjects, insertedObjects];
+    [self logMessage:lmessage];
+}
+
+- (void) setup {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(shouldLog:)
+                   name:NSManagedObjectContextObjectsDidChangeNotification
+                 object:nil];
+}
+
+@end
+
 @implementation RCWAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -31,6 +66,13 @@
     RCWMainViewController *controller = (RCWMainViewController *)self.window.rootViewController;
     controller.managedObjectContext = self.managedObjectContext;
     [self setupMasterKey];
+    
+    NSURL *accounting = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"accountinglogs.sqlite"];
+    
+    AccountingDocument *adoc = [[AccountingDocument alloc] initWithFileURL:accounting];
+    [adoc setup];
+    [self setValue:adoc forKey:@"AccountingData"];
+    
     return YES;
 }
 							
@@ -121,8 +163,11 @@
     }
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CincyCocoaHeadsTransient.sqlite"];
-    
+
     NSError *error = nil;
+    
+   
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
@@ -150,7 +195,11 @@
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }    
+    }
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm setAttributes:@{ NSFileProtectionKey : NSFileProtectionComplete }
+         ofItemAtPath:[storeURL path] error:&error];
     
     return _persistentStoreCoordinator;
 }
@@ -161,6 +210,14 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void) applicationProtectedDataDidBecomeAvailable:(UIApplication *)application {
+    NSLog(@"Hey, I've got data!");
+}
+
+- (void) applicationProtectedDataWillBecomeUnavailable:(UIApplication *)application {
+    NSLog(@"Danger, data will be encrypted");
 }
 
 @end
