@@ -35,6 +35,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
     NSLog(@"Here: %@",[NSThread currentThread]);
     AppDelegate *appdel = [UIApplication sharedApplication].delegate;
     [appdel.persistentStoreCoordinator performBlock:^{
@@ -63,14 +64,61 @@
     [self.frc performFetch:&error];
 }
 
+- (IBAction) fancyImport:(id)sender {
+    
+    self.progressHolder.hidden = NO;
+    self.progressView.progress = 0.0;
+
+    AppDelegate *appdel = [UIApplication sharedApplication].delegate;
+    @autoreleasepool {
+        NSManagedObjectContext *importContext = [appdel seperatePersistantStoreCoordinator];
+        [importContext.persistentStoreCoordinator performBlock:^{
+            [importContext performBlock:^{
+                int i = 0;
+                NSLog(@"Starting Import");
+                while (i < 10000) {
+                    i++;
+                    Part *p = [NSEntityDescription insertNewObjectForEntityForName:@"Part"
+                                                            inManagedObjectContext:importContext];
+                    p.number = @(arc4random_uniform(1000));
+                    p.quantity = @(arc4random_uniform(30));
+                    p.storeNumber = @(arc4random_uniform(8));
+                    if ((i % 100) == 0) {
+                        NSError *error = nil;
+                        BOOL success = [importContext save:&error];
+                        if (success) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                float prog = i/10000.0;
+                                [self.progressView setProgress:prog animated:YES];
+                            });
+                        }
+                    }
+                }
+                NSError *importError;
+                [importContext save:&importError];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.progressHolder.hidden = YES;
+                    [self.childContext.parentContext reset];
+                    [self.childContext reset];
+                    [self.frc performFetch:nil];
+                    [self.tableView reloadData];
+                });
+                NSLog(@"Ending Import");
+            }];
+            
+        }];
+    }
+}
+
 - (IBAction)didTapImport:(id)sender {
 
     self.progressHolder.hidden = NO;
     self.progressView.progress = 0.0;
-    
+
     [self.childContext performBlock:^{
         int i = 0;
-        
+        NSLog(@"Starting Import");
         while (i < 10000) {
             i++;
              Part *p = [NSEntityDescription insertNewObjectForEntityForName:@"Part"
@@ -86,12 +134,6 @@
                         float prog = i/10000.0;
                         [self.progressView setProgress:prog animated:YES];
                     });
-
-                    /* NSError *parentError = nil;
-                          BOOL psuccess = [self.childContext.parentContext save:&parentError];
-                          if (psuccess) { */
-                    
-                         /* } */
                 }
             }
         }
@@ -102,6 +144,7 @@
                 self.progressHolder.hidden = YES;
             }
         }];
+        NSLog(@"Ending Import");
     }];
 }
 

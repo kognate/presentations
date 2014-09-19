@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
-
+@property (strong, nonatomic) NSPersistentStoreCoordinator *importCoordinator;
 @end
 
 @implementation AppDelegate
@@ -91,6 +91,21 @@
     }
     
     return _persistentStoreCoordinator;
+}
+
+- (NSManagedObjectContext *) seperatePersistantStoreCoordinator {
+    if (self.importCoordinator == nil) {
+        self.importCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataConcurrency.sqlite"];
+        NSError *error = nil;
+        if (![self.importCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+        {
+            abort();
+        }
+    }
+    NSManagedObjectContext *_importContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_importContext setPersistentStoreCoordinator:self.importCoordinator];
+    return _importContext;
 }
 
 
