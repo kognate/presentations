@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40340B2419CDEFA400E18342 /* MyDocumentSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 40340B2319CDEFA400E18342 /* MyDocumentSubclass.m */; };
 		40CEF22F19CD5780004A076C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF22E19CD5780004A076C /* main.m */; };
 		40CEF23219CD5780004A076C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF23119CD5780004A076C /* AppDelegate.m */; };
 		40CEF23519CD5780004A076C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF23419CD5780004A076C /* ViewController.m */; };
@@ -14,6 +15,8 @@
 		40CEF23A19CD5780004A076C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40CEF23919CD5780004A076C /* Images.xcassets */; };
 		40CEF23D19CD5780004A076C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40CEF23B19CD5780004A076C /* LaunchScreen.xib */; };
 		40CEF24919CD5780004A076C /* COCFManagedDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF24819CD5780004A076C /* COCFManagedDocumentTests.m */; };
+		40CEF25419CD5F30004A076C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF25219CD5F30004A076C /* Model.xcdatamodeld */; };
+		40CEF25819CDDFD6004A076C /* Attendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CEF25719CDDFD6004A076C /* Attendee.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40340B2219CDEFA400E18342 /* MyDocumentSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocumentSubclass.h; sourceTree = "<group>"; };
+		40340B2319CDEFA400E18342 /* MyDocumentSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocumentSubclass.m; sourceTree = "<group>"; };
 		40CEF22919CD5780004A076C /* COCFManagedDocument.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = COCFManagedDocument.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CEF22D19CD5780004A076C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40CEF22E19CD5780004A076C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +45,10 @@
 		40CEF24219CD5780004A076C /* COCFManagedDocumentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = COCFManagedDocumentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CEF24719CD5780004A076C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40CEF24819CD5780004A076C /* COCFManagedDocumentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COCFManagedDocumentTests.m; sourceTree = "<group>"; };
+		40CEF25319CD5F30004A076C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		40CEF25519CD617F004A076C /* COCFManagedDocument.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = COCFManagedDocument.entitlements; sourceTree = "<group>"; };
+		40CEF25619CDDFD6004A076C /* Attendee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attendee.h; sourceTree = "<group>"; };
+		40CEF25719CDDFD6004A076C /* Attendee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attendee.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +72,9 @@
 		40CEF22019CD5780004A076C = {
 			isa = PBXGroup;
 			children = (
+				40CEF25219CD5F30004A076C /* Model.xcdatamodeld */,
+				40CEF25619CDDFD6004A076C /* Attendee.h */,
+				40CEF25719CDDFD6004A076C /* Attendee.m */,
 				40CEF22B19CD5780004A076C /* COCFManagedDocument */,
 				40CEF24519CD5780004A076C /* COCFManagedDocumentTests */,
 				40CEF22A19CD5780004A076C /* Products */,
@@ -81,6 +93,7 @@
 		40CEF22B19CD5780004A076C /* COCFManagedDocument */ = {
 			isa = PBXGroup;
 			children = (
+				40CEF25519CD617F004A076C /* COCFManagedDocument.entitlements */,
 				40CEF23019CD5780004A076C /* AppDelegate.h */,
 				40CEF23119CD5780004A076C /* AppDelegate.m */,
 				40CEF23319CD5780004A076C /* ViewController.h */,
@@ -89,6 +102,8 @@
 				40CEF23919CD5780004A076C /* Images.xcassets */,
 				40CEF23B19CD5780004A076C /* LaunchScreen.xib */,
 				40CEF22C19CD5780004A076C /* Supporting Files */,
+				40340B2219CDEFA400E18342 /* MyDocumentSubclass.h */,
+				40340B2319CDEFA400E18342 /* MyDocumentSubclass.m */,
 			);
 			path = COCFManagedDocument;
 			sourceTree = "<group>";
@@ -168,6 +183,12 @@
 				TargetAttributes = {
 					40CEF22819CD5780004A076C = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 8RNJ3NH8K7;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					40CEF24119CD5780004A076C = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -220,8 +241,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				40CEF23519CD5780004A076C /* ViewController.m in Sources */,
+				40CEF25819CDDFD6004A076C /* Attendee.m in Sources */,
+				40340B2419CDEFA400E18342 /* MyDocumentSubclass.m in Sources */,
 				40CEF23219CD5780004A076C /* AppDelegate.m in Sources */,
 				40CEF22F19CD5780004A076C /* main.m in Sources */,
+				40CEF25419CD5F30004A076C /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,9 +367,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = COCFManagedDocument/COCFManagedDocument.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = COCFManagedDocument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -353,9 +381,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = COCFManagedDocument/COCFManagedDocument.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = COCFManagedDocument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -412,6 +444,7 @@
 				40CEF24E19CD5780004A076C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40CEF24F19CD5780004A076C /* Build configuration list for PBXNativeTarget "COCFManagedDocumentTests" */ = {
 			isa = XCConfigurationList;
@@ -420,8 +453,22 @@
 				40CEF25119CD5780004A076C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40CEF25219CD5F30004A076C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40CEF25319CD5F30004A076C /* Model.xcdatamodel */,
+			);
+			currentVersion = 40CEF25319CD5F30004A076C /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 40CEF22119CD5780004A076C /* Project object */;
 }
