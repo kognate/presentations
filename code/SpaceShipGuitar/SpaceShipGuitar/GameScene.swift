@@ -34,6 +34,18 @@ class GameScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
+        
+        let ship = self.childNodeWithName("ship")
+        let sputnick = ship.childNodeWithName("sputnik")
+        
+        let spinner = SKAction.rotateByAngle(2 * 3.14159, duration: 1)
+        let slide = SKAction.group([SKAction.moveBy(CGVectorMake(200, 200), duration: 0.5),
+            SKAction.moveBy(CGVectorMake(-200, -200), duration: 0.5)])
+        let forever = SKAction.repeatActionForever(SKAction.group([spinner, slide]))
+        sputnick.runAction(forever)
+        
+        let fire = ship.childNodeWithName("fire") as SKEmitterNode
+
         self.name = "scene"
         self.sounds = [ "string_one" : SKAction.playSoundFileNamed("tone_one.m4a", waitForCompletion:false),
             "string_two" : SKAction.playSoundFileNamed("tone_two.m4a", waitForCompletion:false),
@@ -61,8 +73,8 @@ class GameScene: SKScene {
                 self.actions.append(moveaction)
                 
                 if let soundaction = self.sounds[plucked.name] as? SKAction {
-                        self.actions.append(soundaction)
-//                        self.actions.append(SKAction.group([soundaction, self.pulse()]))
+//                        self.actions.append(soundaction)
+                       self.actions.append(SKAction.group([soundaction, self.pulse()]))
                     }
                 self.editTime = 0.0;
             }

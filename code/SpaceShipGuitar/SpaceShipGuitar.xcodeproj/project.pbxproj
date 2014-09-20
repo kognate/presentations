@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4043E1DF199D90D1003C7AB0 /* CapnMal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4043E1DD199D90D1003C7AB0 /* CapnMal.sks */; };
+		4043E1E0199D90D1003C7AB0 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043E1DE199D90D1003C7AB0 /* spark.png */; };
 		40E3A295199C57DE00D90813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3A294199C57DE00D90813 /* AppDelegate.swift */; };
 		40E3A297199C57DE00D90813 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40E3A296199C57DE00D90813 /* GameScene.sks */; };
 		40E3A299199C57DE00D90813 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3A298199C57DE00D90813 /* GameScene.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4043E1DD199D90D1003C7AB0 /* CapnMal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CapnMal.sks; sourceTree = "<group>"; };
+		4043E1DE199D90D1003C7AB0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		40E3A28F199C57DE00D90813 /* SpaceShipGuitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceShipGuitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E3A293199C57DE00D90813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E3A294199C57DE00D90813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 		40E3A286199C57DE00D90813 = {
 			isa = PBXGroup;
 			children = (
+				4043E1DD199D90D1003C7AB0 /* CapnMal.sks */,
+				4043E1DE199D90D1003C7AB0 /* spark.png */,
 				40E3A291199C57DE00D90813 /* SpaceShipGuitar */,
 				40E3A2A8199C57DE00D90813 /* SpaceShipGuitarTests */,
 				40E3A290199C57DE00D90813 /* Products */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4043E1DF199D90D1003C7AB0 /* CapnMal.sks in Resources */,
 				40E3A2C2199CE4E900D90813 /* tone_nine.m4a in Resources */,
 				40E3A2C1199CE4E900D90813 /* tone_four.m4a in Resources */,
 				40E3A2BF199CE4E900D90813 /* tone_eight.m4a in Resources */,
@@ -234,6 +241,7 @@
 				40E3A2C0199CE4E900D90813 /* tone_five.m4a in Resources */,
 				40E3A2C7199CE4E900D90813 /* tone_three.m4a in Resources */,
 				40E3A2C8199CE4E900D90813 /* tone_two.m4a in Resources */,
+				4043E1E0199D90D1003C7AB0 /* spark.png in Resources */,
 				40E3A297199C57DE00D90813 /* GameScene.sks in Resources */,
 				40E3A29E199C57DE00D90813 /* Main.storyboard in Resources */,
 				40E3A2C6199CE4E900D90813 /* tone_ten.m4a in Resources */,
@@ -443,6 +451,7 @@
 				40E3A2B1199C57DE00D90813 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40E3A2B2199C57DE00D90813 /* Build configuration list for PBXNativeTarget "SpaceShipGuitarTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +460,7 @@
 				40E3A2B4199C57DE00D90813 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
