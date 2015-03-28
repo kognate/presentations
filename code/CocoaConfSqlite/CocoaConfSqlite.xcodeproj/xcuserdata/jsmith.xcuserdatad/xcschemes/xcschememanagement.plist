@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>CocoaConfSqlite.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>CocoaConfSqliteSwift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>gnostic.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>40A8DAF51AC6626600078438</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40A8DB091AC6626600078438</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40F32F2C1AC36A2200952F37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40F32F451AC36A2300952F37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40F32F5E1AC3BD8500952F37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
