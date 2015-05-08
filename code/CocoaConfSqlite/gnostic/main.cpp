@@ -43,7 +43,7 @@ int main(int argc, const char * argv[]) {
     const char *commandsCStr = commandsStr.c_str();
     
     const char *query = "select id,graph from graphs where graphs match :matchwords";
-    // const char *query = "select id,truncateField(graph) from graphs where graphs match :matchwords";
+    //const char *query = "select id,truncateField(graph) from graphs where graphs match :matchwords";
     
     sqlite3_prepare(db, query, (int)strlen(query), &stmt, NULL);
     int param_index = sqlite3_bind_parameter_index(stmt, ":matchwords");
