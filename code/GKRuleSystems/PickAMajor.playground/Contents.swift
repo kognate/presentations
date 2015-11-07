@@ -37,3 +37,14 @@ ruleSystem.evaluate()
 ruleSystem.facts
 ruleSystem.gradeForFact("Math")
 ruleSystem.gradeForFact("History")
+
+// Quick Note, Apple uses structs in their docs
+// This is probably a good idea
+enum Fact : String {
+    case Math = "Math"
+    case History = "History"
+}
+
+// But it's ugly
+ruleSystem.minimumGradeForFacts([Fact.Math.rawValue])
+
