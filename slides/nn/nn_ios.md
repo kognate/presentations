@@ -63,6 +63,70 @@ https://github.com/torch/torch7/wiki/Cheatsheet
 
 ---
 
+# Cheap Reshapes
+
+```lua
+th> t = torch.Tensor(5,3)
+                                                                      [0.0001s]	
+th> t = torch.Tensor(5,3):random(50)
+                                                                      [0.0000s]	
+th> t
+ 22   6  16
+ 14  24   2
+ 15  31  45
+ 40  22  15
+ 18  13  47
+[torch.DoubleTensor of size 5x3]
+```
+
+---
+
+
+```lua
+th> t:reshape(15)
+ 22
+  6
+ 16
+ 14
+ 24
+  2
+ 15
+ 31
+ 45
+ 40
+ 22
+ 15
+ 18
+ 13
+ 47
+[torch.DoubleTensor of size 15]
+
+                                                                      [0.0036s]	
+th> t:reshape(3,5)
+ 22   6  16  14  24
+  2  15  31  45  40
+ 22  15  18  13  47
+[torch.DoubleTensor of size 3x5]
+```
+
+---
+
+# And Apply Functions to elements
+
+```lua
+th> t:apply(function(x)
+..> return math.sin(x)
+..> end)
+-0.0089 -0.2794 -0.2879
+ 0.9906 -0.9056  0.9093
+ 0.6503 -0.4040  0.8509
+ 0.7451 -0.0089  0.6503
+-0.7510  0.4202  0.1236
+[torch.DoubleTensor of size 5x3]
+```
+
+---
+
 # We can solve simultaneous equations
 
 Consider:
@@ -102,6 +166,141 @@ th> torch.inverse(a) * b
   - FloatTensor -- contains floats
   - DoubleTensor -- contains doubles
   
+---
+
+```lua
+th> t = torch.Tensor(5,5)
+                                                                      [0.0001s]	
+th> t:random(20)
+ 11  19  10   2  11
+ 20   8   2   8  11
+  3   8   7  19   1
+ 18  10  18  11  20
+ 14  19  19  14   3
+[torch.DoubleTensor of size 5x5]
+```
+
+---
+
+```lua
+th> t:sum()
+286	
+                                                                      [0.0001s]	
+th> t:narrow(1,2,3)
+ 20   8   2   8  11
+  3   8   7  19   1
+ 18  10  18  11  20
+[torch.DoubleTensor of size 3x5]
+
+```
+
+---
+
+```lua
+                                                                      [0.0003s]	
+th> t:narrow(1,2,3):fill(0)
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 0  0  0  0  0
+[torch.DoubleTensor of size 3x5]
+
+                                                                      [0.0037s]	
+th> t
+ 11  19  10   2  11
+  0   0   0   0   0
+  0   0   0   0   0
+  0   0   0   0   0
+ 14  19  19  14   3
+[torch.DoubleTensor of size 5x5]
+
+                                                                      [0.0003s]	
+```																	  
+
+---
+
+# There are some surprises
+
+```lua
+th> y = t
+                                                                      [0.0001s]	
+th> t
+ 11  19  10   2  11
+  0   0   0   0   0
+  0   0   0   0   0
+  0   0   0   0   0
+ 14  19  19  14   3
+[torch.DoubleTensor of size 5x5]
+
+                                                                      [0.0003s]	
+th> y
+ 11  19  10   2  11
+  0   0   0   0   0
+  0   0   0   0   0
+  0   0   0   0   0
+ 14  19  19  14   3
+[torch.DoubleTensor of size 5x5]
+```
+
+---
+
+```lua
+th> y:fill(1)
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+[torch.DoubleTensor of size 5x5]
+
+                                                                      [0.0003s]	
+th> t
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+[torch.DoubleTensor of size 5x5]
+
+                                                                      [0.0003s]	
+```
+
+---
+
+# Use clone
+
+```lua
+th> x = t:clone()
+                                                                      [0.0001s]	
+th> x
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+[torch.DoubleTensor of size 5x5]
+```
+
+---
+
+```lua
+th> x:random(10)
+  4   2   5   3   3
+  6   9  10   7   3
+  6   5  10   1   2
+  4   9   8   6   9
+  9   3   9  10   6
+[torch.DoubleTensor of size 5x5]
+
+                                                                      [0.0003s]	
+th> t
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+ 1  1  1  1  1
+[torch.DoubleTensor of size 5x5]
+```
+
 ---
 
 # There are a lot of packages
