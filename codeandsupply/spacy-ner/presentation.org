@@ -1,0 +1,31 @@
+* Natural Language Processing
+** Stop Words
+** Entity Recognition
+** Parsing Human Languages
+** Real Parsing
+   This is mostly a note about nltk having a CFG parser but
+that parser is infinately less (generally) useful than
+something like Lark.
+* Tools for NLP in Python
+** NLTK
+   This is one of the most mature and widley used
+frameworks for NLP
+** Spacy
+   This is the fastest.  And has, IMHO, a great syntax
+* Demo of Basic Spacy
+  <jupyter notebook>
+* NER in Spacy
+* Train a model in Spacy
+* Deploy the service
+** Gcloud
+
+#+BEGIN_EXAMPLE
+   gcloud init
+   gcloud container clusters create experimental-aone
+   gcloud container clusters get-credentials experimental-aone
+   kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080
+   kubectl expose deployment hello-server --type "LoadBalancer"
+   kubectl get service hello-server
+   curl http://<HOSTNAME>:8080/
+#+END_EXAMPLE
+
