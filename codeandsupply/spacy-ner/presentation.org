@@ -15,7 +15,19 @@ frameworks for NLP
 * Demo of Basic Spacy
   <jupyter notebook>
 * NER in Spacy
+
+** gui tools:
+
+https://prodi.gy/ from the creators of spacy
+
 * Train a model in Spacy
+
+you can also create a vm for this:
+#+BEGIN_EXAMPLE
+gcloud compute instances create cands -
+-image-family ubuntu-1804-lts --image-project ubuntu-os-cloud --machine-type n1-highcpu-16
+#+END_EXAMPLE
+
 * Deploy the service
 ** Gcloud
 
