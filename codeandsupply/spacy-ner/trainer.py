@@ -23,7 +23,7 @@ mnlp = spacy.load('en')
 
 matcher = PhraseMatcher(mnlp.vocab)
 for i in ['Be Best', 'be best', 'bebest', 'BE BEST', 'be ebst']:
-    matcher.add('BEBEST', None, mnlp(i))
+    matcher.add('WH_PROGRAM', None, mnlp(i))
 
 to_train_ents = []
 
@@ -65,7 +65,7 @@ for u in training_urls:
         print("fetching {}".format(u))
         bb = url_to_string(u)
         with open(p, 'w') as f:
-            f.write(bb)
+            f.write(bb.encode('ascii', errors='replace').decode('ascii'))
     doc = mnlp(bb.encode('ascii', errors='replace').decode("ascii"))
     res = []
     matches = matcher(doc)
