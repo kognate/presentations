@@ -12,6 +12,8 @@ def offseter(lbl, doc, matchitem):
 label = 'CIADIR'
 
 nlp = spacy.load('en')
+#nlp = spacy.blank('en')
+
 if 'ner' not in nlp.pipe_names:
     ner = nlp.create_pipe('ner')
     nlp.add_pipe(ner)
