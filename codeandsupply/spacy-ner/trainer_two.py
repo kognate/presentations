@@ -1,16 +1,17 @@
 import spacy
 from spacy.matcher import PhraseMatcher
-from app import url_to_string
 import plac
 from pathlib import Path
 import random
 
-import hashlib
-import json
-
+def offseter(lbl, doc, matchitem):
+    o_one = len(str(doc[0:matchitem[1]]))
+    o_two = o_one + len(str(doc[matchitem[1]:matchitem[2]]))
+    return (o_one, o_two, lbl)
+    
 label = 'CIADIR'
 
-nlp = spacy.blank('en')
+nlp = spacy.load('en')
 if 'ner' not in nlp.pipe_names:
     ner = nlp.create_pipe('ner')
     nlp.add_pipe(ner)
@@ -19,12 +20,9 @@ else:
 
 ner.add_label(label)
 
-
-mnlp = spacy.load('en')
-
-matcher = PhraseMatcher(mnlp.vocab)
+matcher = PhraseMatcher(nlp.vocab)
 for i in ['Gina Haspel', 'Gina', 'Haspel',]:
-    matcher.add(label, None, mnlp(i))
+    matcher.add(label, None, nlp(i))
 
 res = []
 to_train_ents = []
@@ -32,25 +30,25 @@ with open('gina_haspel.txt') as gh:
     line = True
     while line:
         line = gh.readline()
-        matches = matcher(mnlp(line))
-        for i in matches:
-            res.append((i[1], i[2], label))
-        to_train_ents.append((line, res))
+        mnlp_line = nlp(line)
+        matches = matcher(mnlp_line)
+        res = [offseter(label, mnlp_line, x) for x in matches]
+        to_train_ents.append((line, dict(entities=res)))
 
 @plac.annotations(
     new_model_name=("New model name for model meta.", "option", "nm", str),
     output_dir=("Optional output directory", "option", "o", Path))
-def train(new_model_name='be_best', output_dir=None):
+def train(new_model_name='gina', output_dir=None):
 
     optimizer = nlp.begin_training()
 
     other_pipes = [pipe for pipe in nlp.pipe_names if pipe != 'ner']
     with nlp.disable_pipes(*other_pipes):  # only train NER
-        for itn in range(25):
+        for itn in range(20):
             losses = {}
             random.shuffle(to_train_ents)
             for item in to_train_ents:
-                nlp.update([item[0]], [item[1]], sgd=optimizer, drop=0.40,
+                nlp.update([item[0]], [item[1]], sgd=optimizer, drop=0.35,
                            losses=losses)
             print(losses)
 
@@ -59,13 +57,15 @@ def train(new_model_name='be_best', output_dir=None):
         output_dir = "./gina_haspel"
 
 
-    output_dir = Path(output_dir)
-    if not output_dir.exists():
-        output_dir.mkdir()
+    noutput_dir = Path(output_dir)
+    if not noutput_dir.exists():
+        noutput_dir.mkdir()
 
     nlp.meta['name'] = new_model_name
     nlp.to_disk(output_dir)
 
+
+    random.shuffle(to_train_ents)
 
     test_text = to_train_ents[0][0]
     doc = nlp(test_text)

@@ -12,10 +12,21 @@ something like Lark.
 frameworks for NLP
 ** Spacy
    This is the fastest.  And has, IMHO, a great syntax
+* Install Spacy
+#+begin_src sh
+pip install spacy
+python -m spacy download en
+#+end_src
 * Demo of Basic Spacy
-  <jupyter notebook>
-* NER in Spacy
+** First, we must import and load
+  #+begin_src python :results value
+    import spacy
+    nlp = spacy.load('en')
+  #+end_src
+** Now we can useit
 
+* NER in Spacy
+https://spacy.io/api/annotation
 ** gui tools:
 
 https://prodi.gy/ from the creators of spacy
@@ -40,4 +51,19 @@ gcloud compute instances create cands -
    kubectl get service hello-server
    curl http://<HOSTNAME>:8080/
 #+END_EXAMPLE
+
+#+begin_src sh :results value
+curl -s "http://127.0.0.1:8000/stemmer?source=Bill+is+a+nice+guy" 
+#+end_src
+
+#+begin_src sh :results value
+curl -s http://127.0.0.1:8000/ents?fragment=Bill+is+a+nice+guy |jq
+#+end_src
+
+#+begin_src sh :results value
+curl -s "http://localhost:8000/ents?custom=1&fragment=Gina+has+often+joined+me+and+other+senior+national+security+leaders+for+intelligence+briefings+to+President+Trump"
+#+end_src
+
+#+RESULTS:
+| bill":"PROPN | NOUN | ADJ |
 
