@@ -11,8 +11,11 @@ with open('gina_haspel.txt') as gh:
         res.append(line)
 
 @plac.annotations(model_name=("Load model", "option", "m", Path), sentence=("a sentent", "option", "s", str))
-def run(model_name=Path('./gina_haspel'), sentence=None):
-    nlp = spacy.load(model_name)
+def run(model_name=None, sentence=None):
+    if model_name is None:
+        nlp = spacy.load('en')
+    else:
+        nlp = spacy.load(model_name)
 
     if sentence is not None:
         j = nlp(sentence)

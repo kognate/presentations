@@ -13,6 +13,8 @@ def get_ents():
     is_custom = flask.request.args.get('custom')
     if is_custom is not None:
         nlp = spacy.load(Path('./gina_haspel'))
+    else:
+        nlp = spacy.load('en')
     doc = nlp(data)
     print(doc)
     tuples = [(str(x), x.label_)

@@ -1,69 +1,337 @@
+#+TITLE: Spacy and Custom NER
+#+AUTHOR: Josh Smith <kognate@gmail.com>
+#+OPTIONS: H:2 toc:t num:t
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
+#+LATEX_HEADER: \usepackage{minted}
+#+BEAMER_THEME: Pittsburgh
+
 * Natural Language Processing
 ** Stop Words
-** Entity Recognition
+
+- These are glue words and things that can be ignored sometimes.
+
+#+begin_src python :session :noweb yes :results value :exports both
+  doc = nlp(('These are glue words and'
+             ' things that can be '
+             'ignored sometimes.'))
+  [(x.lemma_, x.pos_, x.text)
+   for x
+   in [y
+       for y
+       in doc
+       if y.is_stop]]
+#+end_src
+
+#+RESULTS:
+| be        | VERB  | are       |
+| and       | CCONJ | and       |
+| that      | ADJ   | that      |
+| can       | VERB  | can       |
+| be        | VERB  | be        |
+| sometimes | ADV   | sometimes |
+
 ** Parsing Human Languages
-** Real Parsing
-   This is mostly a note about nltk having a CFG parser but
-that parser is infinately less (generally) useful than
-something like Lark.
+
+But you need a language model (at minimum).
+
+** Entity Recognition
+
+This is knowing that Jason is a Person and not a Verb.
+
 * Tools for NLP in Python
 ** NLTK
    This is one of the most mature and widley used
 frameworks for NLP
 ** Spacy
    This is the fastest.  And has, IMHO, a great syntax
-* Install Spacy
-#+begin_src sh
+*** This is what we're going to talk about
+** Installs from pip
+#+begin_src sh :tangle install.sh
 pip install spacy
+#+end_src
+
+** don't forget to download at least one model
+
+#+begin_src sh :tangle install.sh
 python -m spacy download en
 #+end_src
+   
 * Demo of Basic Spacy
 ** First, we must import and load
-  #+begin_src python :results value
+   
+#+begin_src python :session :noweb-ref importheader
     import spacy
     nlp = spacy.load('en')
-  #+end_src
-** Now we can useit
+#+end_src
 
-* NER in Spacy
-https://spacy.io/api/annotation
+  #+RESULTS:
+
+** Now we can use it
+
+#+begin_src python :session :noweb yes :results value :tangle example.py :exports both
+  <<importheader>>
+  doc = nlp("Hello everyone, I've some good news to give you")
+  cleaned = [y for y
+             in doc
+             if not y.is_stop and y.pos_ != 'PUNCT']
+  raw = [(x.lemma_, x.pos_) for x in cleaned]
+  print(raw)
+  raw
+#+end_src
+
+#+RESULTS:
+| hello  | INTJ |
+| -PRON- | PRON |
+| have   | VERB |
+| good   | ADJ  |
+| news   | NOUN |
+
+* Named Entity Recognition in Spacy
+
+#+begin_src python :session :results value :tangle entities.py :noweb yes :exports both
+  <<importheader>>
+  to_analyze = ('Hello Code & Supply, '
+                'my name is Josh and tonight '
+                'we\'re in Pittsburgh')
+  doc = nlp(to_analyze)
+  ents = [(x.text, x.label_)
+          for x in doc.ents] 
+  print(ents)
+  ents
+#+end_src
+
+#+RESULTS:
+| Josh       | PERSON |
+| tonight    | TIME   |
+| Pittsburgh | GPE    |
+
+  - https://spacy.io/api/annotation
 ** gui tools:
 
-https://prodi.gy/ from the creators of spacy
-
-* Train a model in Spacy
+ - https://prodi.gy/ from the creators of spacy
+  
+** Train a model in Spacy
 
 you can also create a vm for this:
 #+BEGIN_EXAMPLE
-gcloud compute instances create cands -
--image-family ubuntu-1804-lts --image-project ubuntu-os-cloud --machine-type n1-highcpu-16
+  gcloud compute instances create cands
+       --image-family ubuntu-1804-lts
+       --image-project ubuntu-os-cloud
+       --machine-type n1-highcpu-16
 #+END_EXAMPLE
 
+** Some imports
+
+#+name: header
+#+begin_src python :noweb yes :session
+import spacy
+from spacy.matcher import PhraseMatcher
+import plac
+from pathlib import Path
+import random
+#+end_src
+
+#+RESULTS: header
+
+** Utility function
+
+This function converts the output of the *PhraseMatcher*
+to something usable in training.  The training 
+data needs a string index of characters (start, end, label)
+while the matched output uses index of words from an nlp document.
+
+#+name: offseter
+#+begin_src python :noweb yes
+  def offseter(lbl, doc, matchitem):
+      o_one = len(str(doc[0:matchitem[1]]))
+      subdoc = doc[matchitem[1]:matchitem[2]]
+      o_two = o_one + len(str(subdoc))
+      return (o_one, o_two, lbl)
+#+end_src
+
+** Load and setup
+
+Here we load *spacy* and setup the pipes for training.
+
+#+name: loader
+#+begin_src python :noweb yes :session
+nlp = spacy.load('en')
+
+if 'ner' not in nlp.pipe_names:
+    ner = nlp.create_pipe('ner')
+    nlp.add_pipe(ner)
+else:
+    ner = nlp.get_pipe('ner')
+#+end_src
+
+#+RESULTS: loader
+
+** Setup the phrase matches 
+
+This is to make our lives easier.  Instead
+of setting this up by hand, we can use 
+*PhraseMatcher* class from *spacy* to 
+locate the text we want to label.
+
+#+name: setup_match
+#+begin_src python :noweb yes :session 
+  label = 'CIADIR'
+  matcher = PhraseMatcher(nlp.vocab)
+  for i in ['Gina Haspel', 'Gina', 'Haspel',]:
+      matcher.add(label, None, nlp(i))
+#+end_src
+
+#+RESULTS: setup_match
+
+** What's that look like?
+
+#+begin_src python :session :exports both :results value
+  one = nlp('Gina Haspel was nomiated in 2018')
+  matches = matcher(one)
+  [match for match in matches]
+#+end_src
+
+#+RESULTS:
+| 1.7539557946531887e+19 | 0 | 1 |
+| 1.7539557946531887e+19 | 0 | 2 |
+| 1.7539557946531887e+19 | 1 | 2 |
+
+** Gather training data
+
+#+name: gather_training_data
+#+begin_src python :noweb yes
+   res = []
+   to_train_ents = []
+   with open('gina_haspel.txt') as gh:
+       line = True
+       while line:
+           line = gh.readline()
+           mnlp_line = nlp(line)
+           matches = matcher(mnlp_line)
+           res = [offseter(label, mnlp_line, x)
+                  for x
+                  in matches]
+           to_train_ents.append((line,
+                                 dict(entities=res)))
+#+end_src
+
+** Actually Train The Recognizer
+
+#+name: do_training
+#+begin_src python :noweb yes
+    optimizer = nlp.begin_training()
+
+    other_pipes = [pipe
+                   for pipe
+                   in nlp.pipe_names
+                   if pipe != 'ner']
+    
+    with nlp.disable_pipes(*other_pipes):  # only train NER
+        for itn in range(20):
+            losses = {}
+            random.shuffle(to_train_ents)
+            for item in to_train_ents:
+                nlp.update([item[0]],
+                           [item[1]],
+                           sgd=optimizer,
+                           drop=0.35,
+                           losses=losses)
+            print(losses)
+#+end_src
+
+#+begin_src python :exports none :tangle trainer.py :noweb yes
+  <<header>>
+
+  <<offseter>>
+
+  #nlp = spacy.blank('en')
+  <<loader>>
+
+  ner.add_label(label)
+
+  <<setup_match>>
+
+  <<gather_training_data>>
+
+  @plac.annotations(
+      new_model_name=("New model name for model meta.", "option", "nm", str),
+      output_dir=("Optional output directory", "option", "o", Path))
+  def train(new_model_name='gina', output_dir=None):
+
+      <<do_training>>
+
+      if output_dir is None:
+          output_dir = "./gina_haspel"
+
+
+      noutput_dir = Path(output_dir)
+      if not noutput_dir.exists():
+          noutput_dir.mkdir()
+
+      nlp.meta['name'] = new_model_name
+      nlp.to_disk(output_dir)
+
+
+      random.shuffle(to_train_ents)
+
+      test_text = to_train_ents[0][0]
+      doc = nlp(test_text)
+      print("Entities in '%s'" % test_text)
+      for ent in doc.ents:
+          print(ent.label_, ent.text)
+
+
+  if __name__ == '__main__':
+      plac.call(train)
+
+#+end_src
+
 * Deploy the service
+** Build the Image
+
+#+BEGIN_EXAMPLE
+docker build -f Dockerfile-stemmer . -t gcr.io/codeandsupply/stemmer:latest
+#+END_EXAMPLE
+
 ** Gcloud
 
 #+BEGIN_EXAMPLE
-   gcloud init
-   gcloud container clusters create experimental-aone
-   gcloud container clusters get-credentials experimental-aone
-   kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080
-   kubectl expose deployment hello-server --type "LoadBalancer"
-   kubectl get service hello-server
-   curl http://<HOSTNAME>:8080/
+  gcloud init
+  gcloud auth configure-docker
+  gcloud auth print-access-token
+  # then cut and paste that token
+  docker login -u oauth2accesstoken https://gcr.io
+  # you must have enabled the container registry before you can push
+  docker push gcr.io/codeandsupply/stemmer:latest
+  gcloud container clusters create experimental-aone
+  gcloud container clusters get-credentials experimental-aone
+  kubectl run stemmer-server 
+         --image gcr.io/codeandsupply/stemmer:latest
+         --port 8000
+  kubectl expose deployment stemmer-server --type "LoadBalancer"
+  kubectl get service stemmer-server
+  curl http://<HOSTNAME>:8000/
 #+END_EXAMPLE
 
 #+begin_src sh :results value
 curl -s "http://127.0.0.1:8000/stemmer?source=Bill+is+a+nice+guy" 
 #+end_src
 
+#+RESULTS:
+| bill":"PROPN | NOUN | ADJ |
+
 #+begin_src sh :results value
-curl -s http://127.0.0.1:8000/ents?fragment=Bill+is+a+nice+guy |jq
+curl -s http://127.0.0.1:8000/ents?fragment=Bill+is+a+nice+guy
 #+end_src
+
+#+RESULTS:
+: Bill":"PERSON
 
 #+begin_src sh :results value
 curl -s "http://localhost:8000/ents?custom=1&fragment=Gina+has+often+joined+me+and+other+senior+national+security+leaders+for+intelligence+briefings+to+President+Trump"
 #+end_src
 
 #+RESULTS:
-| bill":"PROPN | NOUN | ADJ |
+: Gina":"CIADIR
 
