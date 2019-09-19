@@ -1,0 +1,5 @@
+aiosqlite
+fastapi[all]
+jupyterlab
+pydantic
+pytest
