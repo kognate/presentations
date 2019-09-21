@@ -3,3 +3,4 @@ fastapi[all]
 jupyterlab
 pydantic
 pytest
+environs
